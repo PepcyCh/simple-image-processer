@@ -6,16 +6,26 @@
 #include "stb_image.h"
 #include "stb_image_write.h"
 
+struct Image {
+    const uint8_t *data;
+    int nx, ny, nn;
+};
+
 int main(int argc, char **argv) {
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
     MainWindow w;
-    w.BindLoadImage([](const std::string &filename, const uint8_t *&data, int &nx, int &ny, int &nn) {
+    Image img;
+    w.BindLoadImage([&img](const std::string &filename, const uint8_t *&data, int &nx, int &ny, int &nn) {
         data = stbi_load(filename.c_str(), &nx, &ny, &nn, 0);
+        img.data = data;
+        img.nx = nx;
+        img.ny = ny;
+        img.nn = nn;
     });
-    w.BindSaveImage([](const std::string &filename, const uint8_t *data, int nx, int ny, int nn) {
-        stbi_write_jpg(filename.c_str(), nx, ny, nn, data, 0);
+    w.BindSaveImage([&img](const std::string &filename) {
+        stbi_write_jpg(filename.c_str(), img.nx, img.ny, img.nn, img.data, 0);
     });
     w.show();
 
