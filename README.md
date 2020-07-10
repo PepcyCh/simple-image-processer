@@ -1,2 +1,11 @@
-# CPP-Project-For-July-2020
-A simple project in ZJU.
+# Simple Image Processer
+Project of Zhejiang University 2020 July course *Project Management and Engineering Practice in C++*.
+
+## External
+
+* stb
+* Qt
+
+## Build
+
+Use CMake to build.
