@@ -22,8 +22,17 @@ class MainWindow : public QWidget {
   private:
     Ui::MainWindow *ui;
 
+    struct Image {
+        const uint8_t *data;
+        int width;
+        int height;
+        int n_channel;
+    } img;
+
     LoadImageTy LoadImage;
     SaveImageTy SaveImage;
+
+    void SetGeoLabel();
 
   private slots:
     void OnLoadBtn();

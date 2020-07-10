@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>616</width>
+    <width>629</width>
     <height>490</height>
    </rect>
   </property>
@@ -15,7 +15,7 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>601</width>
+     <width>611</width>
      <height>471</height>
     </rect>
    </property>
@@ -155,7 +155,7 @@
             </widget>
            </item>
            <item row="5" column="2">
-            <widget class="QLineEdit" name="geo_y_input"/>
+            <widget class="QLineEdit" name="geo_h_input"/>
            </item>
            <item row="4" column="1">
             <widget class="QLabel" name="geo_w_lb">
@@ -213,6 +213,13 @@
            </item>
            <item row="7" column="2">
             <widget class="QLineEdit" name="rot_input"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QCheckBox" name="geo_check">
+             <property name="text">
+              <string>keep aspect</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

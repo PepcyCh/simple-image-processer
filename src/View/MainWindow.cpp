@@ -22,44 +22,40 @@ void MainWindow::BindSaveImage(const SaveImageTy &func) {
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
         tr("Image File (*.bmp, *.png, *.jpg)"));
-    const uint8_t *data;
-    int nx, ny, nn;
-    LoadImage(filename.toStdString(), data, nx, ny, nn);
-    if (data == nullptr) {
+    LoadImage(filename.toStdString(), img.data, img.width, img.height, img.n_channel);
+    if (img.data == nullptr) {
         return;
     }
 
     auto fmt = QImage::Format_RGB888;
-    if (nn == 1) {
+    if (img.n_channel == 1) {
         fmt = QImage::Format_Grayscale8;
-    } else if (nn == 3) {
+    } else if (img.n_channel == 3) {
         fmt = QImage::Format_RGB888;
-    } else if (nn == 4) {
+    } else if (img.n_channel == 4) {
         fmt = QImage::Format_RGBA8888;
     }
-    QImage img(data, nx, ny, nx * nn * sizeof(uint8_t), fmt);
-    auto pixmap = QPixmap::fromImage(img);
+    QImage timg(img.data, img.width, img.height, img.width * img.n_channel * sizeof(uint8_t), fmt);
+    auto pixmap = QPixmap::fromImage(timg);
     pixmap = pixmap.scaled(ui->image_lb->width(), ui->image_lb->height(), Qt::KeepAspectRatio,
         Qt::SmoothTransformation);
     ui->image_lb->setPixmap(pixmap);
     ui->name_lb->setText(filename);
+
+    SetGeoLabel();
 }
 
 void MainWindow::OnSaveBtn() {
-    auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
-        tr("Image File (*.bmp, *.png, *.jpg)"));
-    QImage img = ui->image_lb->pixmap()->toImage();
-    const uint8_t *data = img.constBits();
-    int width = img.width();
-    int height = img.height();
-    int nn = 3;
-    auto fmt = img.format();
-    if (fmt == QImage::Format_Grayscale8) {
-        nn = 1;
-    } else if (fmt == QImage::Format_RGB888) {
-        nn = 3;
-    } else if (fmt == QImage::Format_RGBA8888) {
-        nn = 4;
+    if (img.data == nullptr) {
+        return;
     }
-    SaveImage(filename.toStdString(), data, width, height, nn);
+
+    auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
+        tr("Image File (*.bmp, *.png, *.jpg)"));
+    SaveImage(filename.toStdString(), img.data, img.width, img.height, img.n_channel);
+}
+
+void MainWindow::SetGeoLabel() {
+    ui->geo_w_input->setText(QString::number(img.width));
+    ui->geo_h_input->setText(QString::number(img.height));
 }
