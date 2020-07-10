@@ -23,7 +23,7 @@ class ImageUtil {
         MEAN,
         GAUSSIAN
     };
-    static Image AdaptiveThreshold(const Image &img, int blockSize, AdaptiveThresholdMethod method = MEAN,
+    static Image AdaptiveThreshold(const Image &img, int block_size, AdaptiveThresholdMethod method = MEAN,
         double minus = 0, double sx = 5, double sy = 5);
 
     static Image Erode(const Image &img, const Kernel &kernel, int anchor_x = -1, int anchor_y = -1,

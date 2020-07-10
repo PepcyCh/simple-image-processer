@@ -1,6 +1,13 @@
 #include "MathUtil.h"
 #include <cmath>
 
+double MathUtil::Radians(double deg) {
+    return deg * PI / 180.0;
+}
+double MathUtil::Degree(double rad) {
+    return rad * 180.0 / PI;
+}
+
 int MathUtil::Interpolate(const std::vector<std::pair<int, int>>& points, int x) {
     double res = 0;
     for (auto p : points) {

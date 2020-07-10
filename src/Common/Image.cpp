@@ -14,6 +14,8 @@ Image::Image(size_t width, size_t height) : width(width), height(height) {
 
 Image::Image(size_t width, size_t height, uint8_t *data, int n_channel) {
     if (n_channel == 3 || n_channel == 4) {
+        this->width = width;
+        this->height = height;
         this->data.resize(width * height * 4);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -26,6 +28,8 @@ Image::Image(size_t width, size_t height, uint8_t *data, int n_channel) {
             }
         }
     } else {
+        this->width = 0;
+        this->height = 0;
         this->data.resize(0);
     }
 }

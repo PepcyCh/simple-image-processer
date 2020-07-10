@@ -14,8 +14,13 @@ Image ImageModel::PushImage(const Image &img) {
 }
 
 Image ImageModel::GetCurrent() const {
-    assert(!images.empty() && "cal GetCurrent, but images is empty");
+    assert(!images.empty() && "call GetCurrent(), but images is empty");
     return images[curr];
+}
+
+Image ImageModel::GetPrevious() const {
+    assert(!images.empty() && curr > 0 && "call GetPrevious(), but images is empty/current image is the first one");
+    return images[curr - 1];
 }
 
 Image ImageModel::Undo() {

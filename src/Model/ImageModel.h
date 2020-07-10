@@ -7,7 +7,9 @@
 class ImageModel {
   public:
     Image PushImage(const Image &img);
+    
     Image GetCurrent() const;
+    Image GetPrevious() const;
 
     Image Undo();
     bool CanUndo() const;

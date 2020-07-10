@@ -1,7 +1,6 @@
 #include "ImageUtil.h"
 
 #include <cmath>
-#include <iostream>
 #include <algorithm>
 
 #include "MathUtil.h"
@@ -654,8 +653,8 @@ Image ImageUtil::Rotate(const Image &img, double angle) {
     double cosa = std::cos(angle);
     double sina = std::sin(angle);
 
-    int width = std::ceil(img.GetWidth() * abs(cosa) + img.GetHeight() * abs(sina));
-    int height = std::ceil(img.GetWidth() * abs(sina) + img.GetHeight() * abs(cosa));
+    int width = std::ceil(img.GetWidth() * std::abs(cosa) + img.GetHeight() * std::abs(sina));
+    int height = std::ceil(img.GetWidth() * std::abs(sina) + img.GetHeight() * std::abs(cosa));
     Image res(width, height);
 
     double sx, sy;
