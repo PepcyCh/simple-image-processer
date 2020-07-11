@@ -3,7 +3,7 @@ add_library(view
 )
 
 # change this to yours (where Qt5Config.cmake exists)
-set(Qt5_DIR "C:\\Qt\\Qt5.14.2\\5.14.2\\mingw73_64\\lib\\cmake\\Qt5")
+#set(Qt5_DIR "C:\\Qt\\Qt5.14.2\\5.14.2\\mingw73_64\\lib\\cmake\\Qt5")
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
 set_property(
