@@ -3,7 +3,7 @@
 static Image::Type GetImageType(const std::string &filename) {
     auto pos = filename.rfind('.');
     auto suffix = filename.substr(pos + 1, filename.size());
-    if (suffix == "jpg") {
+    if (suffix == "jpg" || suffix == ".jpeg") {
         return Image::Type::JPG;
     } else if (suffix == "png") {
         return Image::Type::PNG;
