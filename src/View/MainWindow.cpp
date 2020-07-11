@@ -22,11 +22,11 @@ void MainWindow::BindSaveImage(const SaveImageTy &func) {
 
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
-        tr("Image File (*.bmp, *.png, *.jpg)"));
-    const uint8_t *data;
+        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
+    const uint8_t *data = nullptr;
     int nx, ny, nn;
-    std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
-    LoadImage(s, data, nx, ny, nn);
+    std::string str(filename.toLocal8Bit());
+    LoadImage(str, data, nx, ny, nn);
     if (data == nullptr) {
         return;
     }
@@ -56,8 +56,9 @@ void MainWindow::OnSaveBtn() {
     }
 
     auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
-        tr("Image File (*.bmp, *.png, *.jpg)"));
-    SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
+        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
+    std::string str(filename.toLocal8Bit());
+    SaveImage(str);
 }
 
 void MainWindow::SetGeoLabel(int w, int h) {

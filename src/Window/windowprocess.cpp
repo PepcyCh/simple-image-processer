@@ -3,7 +3,6 @@
 //
 #include "windowprocess.h"
 
-
 int funcss(int argc, char **argv){
     QApplication a(argc, argv);
 
