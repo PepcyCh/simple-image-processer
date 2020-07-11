@@ -5,9 +5,10 @@
 #include "MainWindow.h"
 #include "stb_image.h"
 #include "stb_image_write.h"
+#include "cassert"
 
 struct Image {
-    const uint8_t *data;
+    const uint8_t *data = nullptr;
     int nx, ny, nn;
 };
 

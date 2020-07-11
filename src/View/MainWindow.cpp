@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QDebug>
+#include <QtCore>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -38,7 +39,7 @@ void MainWindow::OnLoadBtn() {
     } else if (nn == 4) {
         fmt = QImage::Format_RGBA8888;
     }
-    QImage img(data, nx, ny, nx * nn * sizeof(uint8_t), fmt);
+    QImage img(data, nx, ny, nx * nn * int(sizeof(uint8_t)), fmt);
     auto pixmap = QPixmap::fromImage(img);
     pixmap = pixmap.scaled(ui->image_lb->width(), ui->image_lb->height(), Qt::KeepAspectRatio,
         Qt::SmoothTransformation);
