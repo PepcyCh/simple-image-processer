@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QDebug>
+#include <QtCore>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -24,7 +25,8 @@ void MainWindow::OnLoadBtn() {
         tr("Image File (*.bmp, *.png, *.jpg)"));
     const uint8_t *data;
     int nx, ny, nn;
-    LoadImage(filename.toStdString(), data, nx, ny, nn);
+    std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
+    LoadImage(s, data, nx, ny, nn);
     if (data == nullptr) {
         return;
     }
@@ -37,7 +39,7 @@ void MainWindow::OnLoadBtn() {
     } else if (nn == 4) {
         fmt = QImage::Format_RGBA8888;
     }
-    QImage img(data, nx, ny, nx * nn * sizeof(uint8_t), fmt);
+    QImage img(data, nx, ny, nx * nn * int(sizeof(uint8_t)), fmt);
     auto pixmap = QPixmap::fromImage(img);
     pixmap = pixmap.scaled(ui->image_lb->width(), ui->image_lb->height(), Qt::KeepAspectRatio,
         Qt::SmoothTransformation);
@@ -55,7 +57,7 @@ void MainWindow::OnSaveBtn() {
 
     auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
         tr("Image File (*.bmp, *.png, *.jpg)"));
-    SaveImage(filename.toStdString());
+    SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
 }
 
 void MainWindow::SetGeoLabel(int w, int h) {
