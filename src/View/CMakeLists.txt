@@ -22,5 +22,5 @@ target_include_directories(view
 )
 
 target_link_libraries(view
-    PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets
+    PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets common
 )

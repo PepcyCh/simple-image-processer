@@ -1,7 +1,13 @@
-#include <iostream>
+#include <QApplication>
 
-int main() {
-    std::cout << "hello, world" << std::endl;
+#include "appprocess.h"
 
-    return 0;
+int main(int argc, char **argv) {
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication qapp(argc, argv);
+
+    APP image_processer;
+    image_processer.Run_APP();
+
+    return qapp.exec();
 }

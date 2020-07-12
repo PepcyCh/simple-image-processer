@@ -46,5 +46,5 @@ bool ImageModel::CanRedo() const {
 
 void ImageModel::Reset() {
     images.clear();
-    curr = 0;
+    curr = -1;
 }

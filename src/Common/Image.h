@@ -17,6 +17,7 @@ class Image {
     size_t GetWidth() const;
     size_t GetHeight() const;
     const uint8_t *GetData() const;
+    constexpr int GetChannelCnt() const { return 4; }
 
     uint8_t Get(int x, int y, int i) const;
     uint8_t GetR(int x, int y) const;

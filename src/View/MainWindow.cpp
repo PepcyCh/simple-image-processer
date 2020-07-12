@@ -3,7 +3,6 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QDebug>
-#include <QtCore>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -22,14 +21,17 @@ void MainWindow::BindSaveImage(const SaveImageTy &func) {
 
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
-        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
-    const uint8_t *data = nullptr;
-    int nx, ny, nn;
-    std::string str(filename.toLocal8Bit());
-    LoadImage(str, data, nx, ny, nn);
-    if (data == nullptr) {
+        tr("Image File (*.bmp, *.png, *.jpg)"));
+    std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
+    LoadImage(s, shown_image);
+    if (shown_image.Empty()) {
         return;
     }
+
+    int nx = shown_image.GetWidth();
+    int ny = shown_image.GetHeight();
+    int nn = shown_image.GetChannelCnt();
+    const uint8_t *data = shown_image.GetData();
 
     auto fmt = QImage::Format_RGB888;
     if (nn == 1) {
@@ -39,8 +41,8 @@ void MainWindow::OnLoadBtn() {
     } else if (nn == 4) {
         fmt = QImage::Format_RGBA8888;
     }
-    QImage img(data, nx, ny, nx * nn * int(sizeof(uint8_t)), fmt);
-    auto pixmap = QPixmap::fromImage(img);
+    QImage qimg(data, nx, ny, nx * nn * int(sizeof(uint8_t)), fmt);
+    auto pixmap = QPixmap::fromImage(qimg);
     pixmap = pixmap.scaled(ui->image_lb->width(), ui->image_lb->height(), Qt::KeepAspectRatio,
         Qt::SmoothTransformation);
     ui->image_lb->setPixmap(pixmap);
@@ -56,9 +58,8 @@ void MainWindow::OnSaveBtn() {
     }
 
     auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
-        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
-    std::string str(filename.toLocal8Bit());
-    SaveImage(str);
+        tr("Image File (*.bmp, *.png, *.jpg)"));
+    SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
 }
 
 void MainWindow::SetGeoLabel(int w, int h) {
