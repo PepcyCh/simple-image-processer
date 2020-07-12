@@ -3,10 +3,6 @@
 #include <algorithm>
 #include <cmath>
 
-#include "stb_image.h"
-#include "stb_image_write.h"
-#include "ImageUtil.h"
-
 Image::Image(size_t width, size_t height) : width(width), height(height) {
     data.resize(width * height * 4);
     std::fill(data.begin(), data.end(), 0);
@@ -32,32 +28,6 @@ Image::Image(size_t width, size_t height, uint8_t *data, int n_channel) {
         this->height = 0;
         this->data.resize(0);
     }
-}
-
-void Image::Save(const std::string &filename, Type ty) const {
-    if (ty == Type::BMP) {
-        stbi_write_bmp(filename.c_str(), width, height, 4, data.data());
-    } else if (ty == Type::JPG) {
-        stbi_write_jpg(filename.c_str(), width, height, 4, data.data(), 0);
-    } else if (ty == Type::PNG) {
-        stbi_write_png(filename.c_str(), width, height, 4, data.data(), 4 * width);
-    }
-}
-
-Image Image::Load(const std::string &filename, Type ty) {
-    int nx, ny, nn;
-    uint8_t *data = stbi_load(filename.c_str(), &nx, &ny, &nn, 0);
-    if (data == nullptr) {
-        return Image(0, 0);
-    }
-
-    Image img(nx, ny, data, nn);
-    stbi_image_free(data);
-
-    if (ty == Type::BMP) {
-        img = ImageUtil::MirrorX(img);
-    }
-    return img;
 }
 
 bool Image::Empty() const { return data.empty(); }

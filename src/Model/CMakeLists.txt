@@ -1,5 +1,6 @@
 add_library(model
     ImageModel.cpp
+    ImageUtil.cpp
 )
 
 target_include_directories(model

@@ -10,15 +10,6 @@ class Image {
     Image(size_t width, size_t height);
     Image(size_t width, size_t height, uint8_t *data, int n_channel);
 
-    enum class Type {
-        UNKNOWN,
-        BMP,
-        PNG,
-        JPG
-    };
-    void Save(const std::string &filename, Type ty) const;
-    static Image Load(const std::string &filename, Type ty);
-
     bool Empty() const;
     void Resize(size_t width, size_t height);
     void Clear(uint8_t value = 0);
