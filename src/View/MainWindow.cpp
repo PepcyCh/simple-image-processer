@@ -21,7 +21,7 @@ void MainWindow::BindSaveImage(const SaveImageTy &func) {
 
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
-        tr("Image File (*.bmp, *.png, *.jpg)"));
+        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
     std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
     LoadImage(s, shown_image);
     if (shown_image.Empty()) {
@@ -58,7 +58,7 @@ void MainWindow::OnSaveBtn() {
     }
 
     auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
-        tr("Image File (*.bmp, *.png, *.jpg)"));
+        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
     SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
 }
 
