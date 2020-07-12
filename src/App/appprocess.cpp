@@ -32,7 +32,8 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     //Bind Commands.
     mainwindow->BindLoadImage(image_view_model->LoadImageFunc());
     mainwindow->BindSaveImage(image_view_model->SaveImageFunc());
-
+    mainwindow->BindRedoImage(image_view_model->RedoImageFunc());
+    mainwindow->BindUndoImage(image_view_model->UndoImageFunc());
 }
 
 void APP::Run_APP() {

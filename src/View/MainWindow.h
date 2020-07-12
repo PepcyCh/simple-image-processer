@@ -38,19 +38,28 @@ class MainWindow : public QWidget {
     void BindLoadImage(const LoadImageTy &func);
     using SaveImageTy = std::function<void(const std::string &)>;
     void BindSaveImage(const SaveImageTy &func);
+    using UndoImageTy = std::function<void(Image &)>;
+    void BindUndoImage(const UndoImageTy &func);
+    using RedoImageTy = std::function<void(Image &)>;
+    void BindRedoImage(const RedoImageTy &func);
+
 
   private:
     Ui::MainWindow *ui;
 
     bool has_image = false;
     Image shown_image;
-
+    static QString filename;
     LoadImageTy LoadImage;
     SaveImageTy SaveImage;
+    UndoImageTy UndoImage;
+    RedoImageTy RedoImage;
 
     void SetGeoLabel(int w, int h);
-
+    void ShowImage();
   private slots:
     void OnLoadBtn();
     void OnSaveBtn();
+    void OnUndoBtn();
+    void OnRedoBtn();
 };

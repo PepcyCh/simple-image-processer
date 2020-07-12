@@ -19,6 +19,14 @@ void MainWindow::BindSaveImage(const SaveImageTy &func) {
     SaveImage = func;
 }
 
+void MainWindow::BindUndoImage(const MainWindow::UndoImageTy &func) {
+    UndoImage = func;
+}
+
+void MainWindow::BindRedoImage(const MainWindow::RedoImageTy &func) {
+    RedoImage = func;
+}
+
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *jpeg)"));
@@ -27,7 +35,42 @@ void MainWindow::OnLoadBtn() {
     if (shown_image.Empty()) {
         return;
     }
+    ShowImage();
+    has_image = true;
+}
 
+void MainWindow::OnSaveBtn() {
+    if (!has_image) {
+        return;
+    }
+
+    auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
+        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
+    SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
+}
+
+void MainWindow::OnUndoBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    UndoImage(shown_image);
+    ShowImage();
+}
+
+void MainWindow::OnRedoBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    RedoImage(shown_image);
+    ShowImage();
+}
+
+void MainWindow::SetGeoLabel(int w, int h) {
+    ui->geo_w_input->setText(QString::number(w));
+    ui->geo_h_input->setText(QString::number(h));
+}
+
+void MainWindow::ShowImage() {
     int nx = shown_image.GetWidth();
     int ny = shown_image.GetHeight();
     int nn = shown_image.GetChannelCnt();
@@ -44,25 +87,9 @@ void MainWindow::OnLoadBtn() {
     QImage qimg(data, nx, ny, nx * nn * int(sizeof(uint8_t)), fmt);
     auto pixmap = QPixmap::fromImage(qimg);
     pixmap = pixmap.scaled(ui->image_lb->width(), ui->image_lb->height(), Qt::KeepAspectRatio,
-        Qt::SmoothTransformation);
+                           Qt::SmoothTransformation);
     ui->image_lb->setPixmap(pixmap);
     ui->name_lb->setText(filename);
-
-    has_image = true;
     SetGeoLabel(nx, ny);
 }
 
-void MainWindow::OnSaveBtn() {
-    if (!has_image) {
-        return;
-    }
-
-    auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
-        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
-    SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
-}
-
-void MainWindow::SetGeoLabel(int w, int h) {
-    ui->geo_w_input->setText(QString::number(w));
-    ui->geo_h_input->setText(QString::number(h));
-}

@@ -48,3 +48,19 @@ ImageViewModel::SaveImageTy ImageViewModel::SaveImageFunc() const {
         ImageUtil::Save(img, filename, fmt);
     };
 }
+
+ImageViewModel::UndoImageTy ImageViewModel::UndoImageFunc() const {
+    return [this](Image &img) {
+        if(image_model->CanUndo()){
+            img = image_model->Undo(); // Warning: Use Default Constructor.
+        }
+    };
+}
+
+ImageViewModel::RedoImageTy ImageViewModel::RedoImageFunc() const {
+    return [this](Image &img) {
+        if(image_model->CanRedo()){
+            img = image_model->Redo(); // Warning: Use Default Constructor.
+        }
+    };
+}

@@ -14,7 +14,12 @@ class ImageViewModel {
     [[nodiscard]] LoadImageTy LoadImageFunc() const;
     using SaveImageTy = std::function<void(const std::string &)>;
     [[nodiscard]] SaveImageTy SaveImageFunc() const;
+    using UndoImageTy = std::function<void(Image &)>;
+    [[nodiscard]] UndoImageTy UndoImageFunc() const;
+    using RedoImageTy = std::function<void(Image &)>;
+    [[nodiscard]] RedoImageTy RedoImageFunc() const;
     
+
   private:
     std::shared_ptr<ImageModel> image_model;
 };
