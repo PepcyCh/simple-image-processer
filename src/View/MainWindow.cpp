@@ -27,6 +27,12 @@ void MainWindow::BindRedoImage(const MainWindow::RedoImageTy &func) {
     RedoImage = func;
 }
 
+
+void MainWindow::BindGrayScale(const MainWindow::GrayScaleTy &func) {
+    GrayScale = func;
+}
+
+
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *jpeg)"));
@@ -62,6 +68,14 @@ void MainWindow::OnRedoBtn() {
         return;
     }
     RedoImage(shown_image);
+    ShowImage();
+}
+
+void MainWindow::OnGrayScaleBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    GrayScale(shown_image);
     ShowImage();
 }
 

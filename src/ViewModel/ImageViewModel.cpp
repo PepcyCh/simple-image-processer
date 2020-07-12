@@ -5,7 +5,7 @@
 static ImageUtil::ImageType GetImageType(const std::string &filename) {
     auto pos = filename.rfind('.');
     auto suffix = filename.substr(pos + 1, filename.size());
-    if (suffix == "jpg" || suffix == ".jpeg") {
+    if (suffix == "jpg" || suffix == "jpeg") {
         return ImageUtil::IMG_TY_JPG;
     } else if (suffix == "png") {
         return ImageUtil::IMG_TY_PNG;
@@ -62,5 +62,12 @@ ImageViewModel::RedoImageTy ImageViewModel::RedoImageFunc() const {
         if(image_model->CanRedo()){
             img = image_model->Redo(); // Warning: Use Default Constructor.
         }
+    };
+}
+
+ImageViewModel::GrayScaleTy ImageViewModel::GrayScaleFunc() const {
+    return [this](Image &img) {
+        image_model->PushImage(img);
+        img = ImageUtil::GrayScale(img);
     };
 }

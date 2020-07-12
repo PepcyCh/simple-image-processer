@@ -18,7 +18,8 @@ class ImageViewModel {
     [[nodiscard]] UndoImageTy UndoImageFunc() const;
     using RedoImageTy = std::function<void(Image &)>;
     [[nodiscard]] RedoImageTy RedoImageFunc() const;
-    
+    using GrayScaleTy = std::function<void(Image &)>;
+    [[nodiscard]] GrayScaleTy GrayScaleFunc() const;
 
   private:
     std::shared_ptr<ImageModel> image_model;

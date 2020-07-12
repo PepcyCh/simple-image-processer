@@ -93,7 +93,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_1">
          <attribute name="title">
@@ -348,9 +348,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>gs_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnGrayScaleBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>516</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnLoadBtn()</slot>
   <slot>OnSaveBtn()</slot>
+  <slot>OnGrayScaleBtn()</slot>
  </slots>
 </ui>

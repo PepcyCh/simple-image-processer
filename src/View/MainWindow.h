@@ -42,6 +42,8 @@ class MainWindow : public QWidget {
     void BindUndoImage(const UndoImageTy &func);
     using RedoImageTy = std::function<void(Image &)>;
     void BindRedoImage(const RedoImageTy &func);
+    using GrayScaleTy = std::function<void(Image &)>;
+    void BindGrayScale(const GrayScaleTy &func);
 
 
   private:
@@ -49,11 +51,12 @@ class MainWindow : public QWidget {
 
     bool has_image = false;
     Image shown_image;
-    static QString filename;
+    QString filename;
     LoadImageTy LoadImage;
     SaveImageTy SaveImage;
     UndoImageTy UndoImage;
     RedoImageTy RedoImage;
+    GrayScaleTy GrayScale;
 
     void SetGeoLabel(int w, int h);
     void ShowImage();
@@ -62,4 +65,5 @@ class MainWindow : public QWidget {
     void OnSaveBtn();
     void OnUndoBtn();
     void OnRedoBtn();
+    void OnGrayScaleBtn();
 };

@@ -34,6 +34,7 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindSaveImage(image_view_model->SaveImageFunc());
     mainwindow->BindRedoImage(image_view_model->RedoImageFunc());
     mainwindow->BindUndoImage(image_view_model->UndoImageFunc());
+    mainwindow->BindGrayScale(image_view_model->GrayScaleFunc());
 }
 
 void APP::Run_APP() {
