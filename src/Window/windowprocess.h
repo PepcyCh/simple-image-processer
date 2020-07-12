@@ -11,5 +11,5 @@
 #include <QSlider>
 #include <QSpinBox>
 #include <QDialog>
-int funcss(int argc, char **argv);
+
 #endif //IMAGE_PROCESSER_WINDOWPROCESS_H

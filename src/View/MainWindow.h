@@ -8,6 +8,23 @@
 
 #include <QWidget>
 #include "ui_MainWindow.h"
+class Parameter{
+public:
+    Parameter();
+};
+
+class Command{
+public:
+    Command();
+    void BindParameters(std::shared_ptr<Parameter> _parameters){
+        parameters = _parameters;
+    }
+    virtual void run() = 0;
+protected:
+    std::shared_ptr<Parameter> parameters;
+};
+
+
 
 class MainWindow : public QWidget {
     Q_OBJECT

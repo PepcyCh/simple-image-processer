@@ -11,10 +11,9 @@ class ImageViewModel {
     void ReleaseModel();
 
     using LoadImageTy = std::function<void(const std::string &, const uint8_t *&, int &, int &, int &)>;
-    LoadImageTy LoadImageFunc() const;
+    [[nodiscard]] LoadImageTy LoadImageFunc() const;
     using SaveImageTy = std::function<void(const std::string &)>;
-    SaveImageTy SaveImageFunc() const;
-
+    [[nodiscard]] SaveImageTy SaveImageFunc() const;
   private:
     std::shared_ptr<ImageModel> image_model;
 };
