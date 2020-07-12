@@ -23,17 +23,12 @@ void ImageViewModel::ReleaseModel() {
 }
 
 ImageViewModel::LoadImageTy ImageViewModel::LoadImageFunc() const {
-    return [this](const std::string &filename, const uint8_t *&data, int &w, int &h, int &nn) {
+    return [this](const std::string &filename, Image &img) {
         auto fmt = GetImageType(filename);
-        Image img = Image::Load(filename, fmt);
+        img = Image::Load(filename, fmt);
         if (img.Empty()) {
-            data = nullptr;
             return;
         }
-        data = img.GetData();
-        w = img.GetWidth();
-        h = img.GetHeight();
-        nn = 4;
         image_model->Reset();
         image_model->PushImage(img);
     };

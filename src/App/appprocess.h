@@ -12,6 +12,8 @@ class APP{
 public:
     APP();
     void Run_APP();
+
+private:
     void BindModel(const std::shared_ptr<ImageModel> &_image_model);
     void ReleaseModel();
 
@@ -20,7 +22,6 @@ public:
 
     void BindMainWindow(const std::shared_ptr<MainWindow> &_mainwindow);
     void ReleaseMainWindow();
-
 
 private:
     std::shared_ptr<ImageModel> image_model;

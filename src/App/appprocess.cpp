@@ -36,5 +36,5 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
 }
 
 void APP::Run_APP() {
-    ;
+    mainwindow->show();
 }

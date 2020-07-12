@@ -7,5 +7,5 @@ target_include_directories(app
         )
 
 target_link_libraries(app
-        PUBLIC model view viewmodel window
+        PUBLIC model view viewmodel
         )
