@@ -11,6 +11,15 @@ class ImageUtil {
   public:
     ImageUtil() = delete;
 
+    enum ImageType {
+        IMG_TY_UNKNOWN,
+        IMG_TY_JPG,
+        IMG_TY_PNG,
+        IMG_TY_BMP
+    };
+    static Image Load(const std::string &filename, ImageType ty);
+    static void Save(const Image &img, const std::string &filename, ImageType ty);
+
     static Image RGB2YUV(const Image &img);
     static Image YUV2RGB(const Image &img);
     static Image RGB2Lab(const Image &img);

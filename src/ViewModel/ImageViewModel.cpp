@@ -1,16 +1,18 @@
 #include "ImageViewModel.h"
 
-static Image::Type GetImageType(const std::string &filename) {
+#include "ImageUtil.h"
+
+static ImageUtil::ImageType GetImageType(const std::string &filename) {
     auto pos = filename.rfind('.');
     auto suffix = filename.substr(pos + 1, filename.size());
-    if (suffix == "jpg") {
-        return Image::Type::JPG;
+    if (suffix == "jpg" || suffix == ".jpeg") {
+        return ImageUtil::IMG_TY_JPG;
     } else if (suffix == "png") {
-        return Image::Type::PNG;
+        return ImageUtil::IMG_TY_PNG;
     } else if (suffix == "bmp") {
-        return Image::Type::BMP;
+        return ImageUtil::IMG_TY_BMP;
     } else {
-        return Image::Type::UNKNOWN;
+        return ImageUtil::IMG_TY_UNKNOWN;
     }
 }
 
@@ -25,7 +27,7 @@ void ImageViewModel::ReleaseModel() {
 ImageViewModel::LoadImageTy ImageViewModel::LoadImageFunc() const {
     return [this](const std::string &filename, Image &img) {
         auto fmt = GetImageType(filename);
-        img = Image::Load(filename, fmt);
+        img = ImageUtil::Load(filename, fmt);
         if (img.Empty()) {
             return;
         }
@@ -38,11 +40,11 @@ ImageViewModel::SaveImageTy ImageViewModel::SaveImageFunc() const {
     return [this](const std::string &_filename) {
         auto filename = _filename;
         auto fmt = GetImageType(filename);
-        if (fmt == Image::Type::UNKNOWN) {
-            fmt = Image::Type::JPG;
+        if (fmt == ImageUtil::IMG_TY_UNKNOWN) {
+            fmt = ImageUtil::IMG_TY_JPG;
             filename += ".jpg";
         }
         auto img = image_model->GetCurrent();
-        img.Save(filename, fmt);
+        ImageUtil::Save(img, filename, fmt);
     };
 }

@@ -19,7 +19,8 @@ Image ImageModel::GetCurrent() const {
 }
 
 Image ImageModel::GetPrevious() const {
-    assert(!images.empty() && curr > 0 && "call GetPrevious(), but images is empty/current image is the first one");
+    assert(!images.empty() && "call GetPrevious(), but images is empty");
+    assert(curr > 0 && "call GetPrevious(), but current image is the first one");
     return images[curr - 1];
 }
 

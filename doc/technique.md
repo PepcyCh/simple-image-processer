@@ -4,8 +4,8 @@ C++ 17
 
 ## 第三方库
 
-* Qt
-* stb
+* Qt 5.14.2
+* stb（`stb_image.h` & `stb_image_write.h`）
 
 ## 项目管理
 

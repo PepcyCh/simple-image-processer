@@ -4,6 +4,53 @@
 #include <algorithm>
 
 #include "MathUtil.h"
+#include "stb_image.h"
+#include "stb_image_write.h"
+
+static int Interpolate(const std::vector<std::pair<int, int>> &points, int x) {
+    double res = 0;
+    for (auto p : points) {
+        double l = p.second;
+        for (auto q : points) if (p.first != q.first) {
+            l *= double(x - q.first) / (p.first - q.first);
+        }
+        res += l;
+    }
+    return round(res);
+}
+
+static double Gauss(double x, double sigma) {
+    return std::exp(-x * x / 2 / sigma) / (std::sqrt(2 * MathUtil::PI) * sigma);
+}
+
+static double GaussSqr(double xsqr, double sigma) {
+    return std::exp(-xsqr / 2 / sigma) / (std::sqrt(2 * MathUtil::PI) * sigma);
+}
+
+Image ImageUtil::Load(const std::string &filename, ImageType ty) {
+    int nx, ny, nn;
+    uint8_t *data = stbi_load(filename.c_str(), &nx, &ny, &nn, 0);
+    if (data == nullptr) {
+        return Image(0, 0);
+    }
+
+    Image img(nx, ny, data, nn);
+    stbi_image_free(data);
+
+    if (ty == IMG_TY_BMP) {
+        img = ImageUtil::MirrorX(img);
+    }
+    return img;
+}
+void ImageUtil::Save(const Image &img, const std::string &filename, ImageType ty) {
+    if (ty == IMG_TY_BMP) {
+        stbi_write_bmp(filename.c_str(), img.GetWidth(), img.GetHeight(), 4, img.GetData());
+    } else if (ty == IMG_TY_JPG) {
+        stbi_write_jpg(filename.c_str(), img.GetWidth(), img.GetHeight(), 4, img.GetData(), 0);
+    } else if (ty == IMG_TY_PNG) {
+        stbi_write_png(filename.c_str(), img.GetWidth(), img.GetHeight(), 4, img.GetData(), 4 * img.GetWidth());
+    }
+}
 
 Image ImageUtil::RGB2YUV(const Image &img) {
     Image res(img.GetWidth(), img.GetHeight());
@@ -424,7 +471,7 @@ Image ImageUtil::Bilateral(const Image &img, int block_size, double sigma_s, dou
                                             + (g - timg.GetG(x, y)) * (g - timg.GetG(x, y))
                                             + (b - timg.GetB(x, y)) * (b - timg.GetB(x, y));
 
-                        double gcol = MathUtil::GaussSqr(col_dist_sqr, sigma_r);
+                        double gcol = GaussSqr(col_dist_sqr, sigma_r);
                         double gspc = kernel[x - i + block_size][y - j + block_size];
                         cnt += gcol * gspc;
                         for (int c = 0; c < 3; c++)
@@ -565,7 +612,7 @@ Image ImageUtil::Curve(const Image &img, const std::vector<std::pair<int, int>> 
     Image res = img;
     for (int i = 0; i < img.GetHeight(); i++) {
         for (int j = 0; j < img.GetWidth(); j++) {
-            int f = MathUtil::Interpolate(points, img.Get(i, j, cid));
+            int f = Interpolate(points, img.Get(i, j, cid));
             res.SetColor(i, j, cid, std::clamp(f, 0, 255));
         }
     }

@@ -1,6 +1,5 @@
 add_library(common
     Image.cpp
-    ImageUtil.cpp
     MathUtil.cpp
 )
 

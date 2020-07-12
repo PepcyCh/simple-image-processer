@@ -2,11 +2,13 @@
 
 ### Common
 
-图像处理函数等
+图像类
 
 ### Model
 
 一个图像的 vector
+
+图像处理函数
 
 ### View
 
@@ -18,11 +20,17 @@ UI
 
 向 View 提供要绑定的函数，比如加载的函数、修改的函数
 
-### Window / App
+### App
 
 创建 M、V、VM 的对象，把 VM 提供的函数绑定给 V
 
-把 M 给 VM，如果 VM 有的是引用的话
+把 M 给 VM，如果 VM 持有的是引用的话
+
+### 分工
+
+* Model、ViewModel - cyw
+* App - zxn
+* View - hqy
 
 ## 迭代
 
