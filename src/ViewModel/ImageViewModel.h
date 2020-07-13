@@ -20,6 +20,8 @@ class ImageViewModel {
     [[nodiscard]] RedoImageTy RedoImageFunc() const;
     using GrayScaleTy = std::function<void(Image &)>;
     [[nodiscard]] GrayScaleTy GrayScaleFunc() const;
+    using ThresholdTy = std::function<void(Image &)>;
+    [[nodiscard]] ThresholdTy ThresholdFunc() const;
 
   private:
     std::shared_ptr<ImageModel> image_model;

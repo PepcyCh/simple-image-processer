@@ -399,6 +399,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>thr_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnThresholdBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>135</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnLoadBtn()</slot>
@@ -406,5 +422,6 @@
   <slot>OnGrayScaleBtn()</slot>
   <slot>OnUndoBtn()</slot>
   <slot>OnRedoBtn()</slot>
+  <slot>OnThresholdBtn()</slot>
  </slots>
 </ui>

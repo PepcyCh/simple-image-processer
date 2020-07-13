@@ -15,21 +15,21 @@ MainWindow::~MainWindow() {
 void MainWindow::BindLoadImage(const LoadImageTy &func) {
     LoadImage = func;
 }
-
 void MainWindow::BindSaveImage(const SaveImageTy &func) {
     SaveImage = func;
 }
-
 void MainWindow::BindUndoImage(const UndoImageTy &func) {
     UndoImage = func;
 }
-
 void MainWindow::BindRedoImage(const RedoImageTy &func) {
     RedoImage = func;
 }
 
 void MainWindow::BindGrayScale(const GrayScaleTy &func) {
     GrayScale = func;
+}
+void MainWindow::BindThreshold(const ThresholdTy &func) {
+    Threshold = func;
 }
 
 void MainWindow::OnLoadBtn() {
@@ -76,6 +76,14 @@ void MainWindow::OnGrayScaleBtn() {
         return;
     }
     GrayScale(shown_image);
+    ShowImage();
+}
+
+void MainWindow::OnThresholdBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    Threshold(shown_image);
     ShowImage();
 }
 

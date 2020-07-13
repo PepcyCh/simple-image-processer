@@ -42,9 +42,11 @@ class MainWindow : public QWidget {
     void BindUndoImage(const UndoImageTy &func);
     using RedoImageTy = std::function<void(Image &)>;
     void BindRedoImage(const RedoImageTy &func);
+
     using GrayScaleTy = std::function<void(Image &)>;
     void BindGrayScale(const GrayScaleTy &func);
-
+    using ThresholdTy = std::function<void(Image &)>;
+    void BindThreshold(const ThresholdTy &func);
 
   private:
     Ui::MainWindow *ui;
@@ -52,18 +54,24 @@ class MainWindow : public QWidget {
     bool has_image = false;
     Image shown_image;
     QString filename;
+
     LoadImageTy LoadImage;
     SaveImageTy SaveImage;
     UndoImageTy UndoImage;
     RedoImageTy RedoImage;
+
     GrayScaleTy GrayScale;
+    ThresholdTy Threshold;
 
     void SetGeoLabel(int w, int h);
     void ShowImage();
+
   private slots:
     void OnLoadBtn();
     void OnSaveBtn();
     void OnUndoBtn();
     void OnRedoBtn();
+
     void OnGrayScaleBtn();
+    void OnThresholdBtn();
 };

@@ -71,3 +71,10 @@ ImageViewModel::GrayScaleTy ImageViewModel::GrayScaleFunc() const {
         image_model->PushImage(img);
     };
 }
+
+ImageViewModel::ThresholdTy ImageViewModel::ThresholdFunc() const {
+    return [this](Image &img) {
+        img = ImageUtil::OtsuThreshold(img);
+        image_model->PushImage(img);
+    };
+}
