@@ -41,6 +41,13 @@ class MainWindow : public QWidget {
 
     using ScaleTy = std::function<void(Image &, double, double)>;
     void BindScale(const ScaleTy &func);
+    using RotateTy = std::function<void(Image &, double)>;
+    void BindRotate(const RotateTy &func);
+
+    using ShearXTy = std::function<void(Image &, double)>;
+    void BindShearX(const ShearXTy &func);
+    using ShearYTy = std::function<void(Image &, double)>;
+    void BindShearY(const ShearYTy &func);
 
   private:
     Ui::MainWindow *ui;
@@ -61,6 +68,10 @@ class MainWindow : public QWidget {
     EqualizationTy Equalization;
 
     ScaleTy Scale;
+    RotateTy Rotate ;
+
+    ShearXTy ShearX ;
+    ShearYTy ShearY ;
 
     std::unique_ptr<AdapThresDialog> adap_thres_dialog;
 

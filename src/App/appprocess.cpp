@@ -42,6 +42,9 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindEqualization(image_view_model->EqualizationFunc());
 
     mainwindow->BindScale(image_view_model->ScaleFunc()) ;
+    mainwindow->BindRotate(image_view_model->RotateFunc()) ;
+    mainwindow->BindShearX(image_view_model->ShearXFunc()) ;
+    mainwindow->BindShearY(image_view_model->ShearYFunc()) ;
 }
 
 void APP::Run_APP() {

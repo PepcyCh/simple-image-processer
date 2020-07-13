@@ -43,6 +43,15 @@ void MainWindow::BindEqualization(const ThresholdTy &func) {
 void MainWindow::BindScale(const ScaleTy &func) {
     Scale = func ;
 }
+void MainWindow::BindRotate(const RotateTy &func) {
+    Rotate = func ;
+}
+void MainWindow::BindShearX(const ShearXTy &func) {
+    ShearX = func ;
+}
+void MainWindow::BindShearY(const ShearYTy &func) {
+    ShearY = func ;
+}
 
 
 void MainWindow::OnLoadBtn() {
@@ -120,7 +129,6 @@ void MainWindow::OnGeoWBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
     }
-
     double w = shown_image.GetWidth(), w_ = ui -> geo_w_input -> text().toInt() ;
     Scale(shown_image, 1.0, w_ / w ) ;
     ShowImage() ;
@@ -129,15 +137,35 @@ void MainWindow::OnGeoHBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
     }
-
     double h = shown_image.GetHeight(), h_ = ui -> geo_h_input -> text().toInt() ;
     Scale(shown_image, h_ / h, 1.0) ;
     ShowImage() ;
 }
 
-void MainWindow::OnRotBtn() {}
-void MainWindow::OnShrXBtn() {}
-void MainWindow::OnShrYBtn() {}
+void MainWindow::OnRotBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    double ang = ui -> rot_input -> text().toInt() ;
+    Rotate(shown_image, ang) ;
+    ShowImage() ;
+}
+void MainWindow::OnShrXBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    double dx = ui -> shr_x_input -> text().toInt() ;
+    ShearX(shown_image, dx) ;
+    ShowImage() ;
+}
+void MainWindow::OnShrYBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    double dy = ui -> shr_y_input -> text().toInt() ;
+    ShearY(shown_image, dy) ;
+    ShowImage() ;
+}
 
 void MainWindow::SetGeoLabel(int w, int h) {
     ui->geo_w_input->setText(QString::number(w));

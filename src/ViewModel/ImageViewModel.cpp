@@ -99,3 +99,24 @@ ImageViewModel::ScaleTy ImageViewModel::ScaleFunc() const {
         image_model->PushImage(img);
     };
 }
+
+ImageViewModel::RotateTy ImageViewModel::RotateFunc() const {
+    return [this](Image &img, double ang) {
+        img = ImageUtil::Rotate(img, ang);
+        image_model->PushImage(img);
+    };
+}
+
+ImageViewModel::RotateTy ImageViewModel::ShearXFunc() const {
+    return [this](Image &img, double dx) {
+        img = ImageUtil::ShearX(img, dx);
+        image_model->PushImage(img);
+    };
+}
+
+ImageViewModel::RotateTy ImageViewModel::ShearYFunc() const {
+    return [this](Image &img, double dy) {
+        img = ImageUtil::ShearY(img, dy);
+        image_model->PushImage(img);
+    };
+}

@@ -31,6 +31,12 @@ class ImageViewModel {
 
     using ScaleTy = std::function<void(Image &, double, double)> ;
     [[nodiscard]] ScaleTy ScaleFunc() const;
+    using RotateTy = std::function<void(Image &, double)> ;
+    [[nodiscard]] RotateTy RotateFunc() const;
+    using RotateTy = std::function<void(Image &, double)> ;
+    [[nodiscard]] RotateTy ShearXFunc() const;
+    using RotateTy = std::function<void(Image &, double)> ;
+    [[nodiscard]] RotateTy ShearYFunc() const;
 
   private:
     std::shared_ptr<ImageModel> image_model;
