@@ -15,32 +15,32 @@ MainWindow::~MainWindow() {
 void MainWindow::BindLoadImage(const LoadImageTy &func) {
     LoadImage = func;
 }
+
 void MainWindow::BindSaveImage(const SaveImageTy &func) {
     SaveImage = func;
 }
 
-void MainWindow::BindUndoImage(const MainWindow::UndoImageTy &func) {
+void MainWindow::BindUndoImage(const UndoImageTy &func) {
     UndoImage = func;
 }
 
-void MainWindow::BindRedoImage(const MainWindow::RedoImageTy &func) {
+void MainWindow::BindRedoImage(const RedoImageTy &func) {
     RedoImage = func;
 }
 
-
-void MainWindow::BindGrayScale(const MainWindow::GrayScaleTy &func) {
+void MainWindow::BindGrayScale(const GrayScaleTy &func) {
     GrayScale = func;
 }
 
-
 void MainWindow::OnLoadBtn() {
     auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
-        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
+        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
     LoadImage(s, shown_image);
     if (shown_image.Empty()) {
         return;
     }
+    this->filename = filename;
     ShowImage();
     has_image = true;
 }
@@ -51,7 +51,7 @@ void MainWindow::OnSaveBtn() {
     }
 
     auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
-        tr("Image File (*.bmp *.png *.jpg *jpeg)"));
+        tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
 }
 

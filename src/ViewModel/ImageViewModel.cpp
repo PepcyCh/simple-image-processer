@@ -51,7 +51,7 @@ ImageViewModel::SaveImageTy ImageViewModel::SaveImageFunc() const {
 
 ImageViewModel::UndoImageTy ImageViewModel::UndoImageFunc() const {
     return [this](Image &img) {
-        if(image_model->CanUndo()){
+        if (image_model->CanUndo()) {
             img = image_model->Undo(); // Warning: Use Default Constructor.
         }
     };
@@ -59,7 +59,7 @@ ImageViewModel::UndoImageTy ImageViewModel::UndoImageFunc() const {
 
 ImageViewModel::RedoImageTy ImageViewModel::RedoImageFunc() const {
     return [this](Image &img) {
-        if(image_model->CanRedo()){
+        if (image_model->CanRedo()) {
             img = image_model->Redo(); // Warning: Use Default Constructor.
         }
     };
@@ -67,7 +67,7 @@ ImageViewModel::RedoImageTy ImageViewModel::RedoImageFunc() const {
 
 ImageViewModel::GrayScaleTy ImageViewModel::GrayScaleFunc() const {
     return [this](Image &img) {
-        image_model->PushImage(img);
         img = ImageUtil::GrayScale(img);
+        image_model->PushImage(img);
     };
 }

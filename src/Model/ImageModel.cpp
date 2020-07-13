@@ -41,7 +41,7 @@ Image ImageModel::Redo() {
 }
 
 bool ImageModel::CanRedo() const {
-    return curr < images.size();
+    return curr + 1 < images.size();
 }
 
 void ImageModel::Reset() {

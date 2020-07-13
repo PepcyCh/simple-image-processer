@@ -52,6 +52,9 @@
         <property name="text">
          <string>no image is open</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
      </layout>
@@ -364,10 +367,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>undo_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnUndoBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>redo_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnRedoBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>606</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>623</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnLoadBtn()</slot>
   <slot>OnSaveBtn()</slot>
   <slot>OnGrayScaleBtn()</slot>
+  <slot>OnUndoBtn()</slot>
+  <slot>OnRedoBtn()</slot>
  </slots>
 </ui>
