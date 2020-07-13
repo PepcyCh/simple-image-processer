@@ -18,10 +18,14 @@ class ImageViewModel {
     [[nodiscard]] UndoImageTy UndoImageFunc() const;
     using RedoImageTy = std::function<void(Image &)>;
     [[nodiscard]] RedoImageTy RedoImageFunc() const;
+
     using GrayScaleTy = std::function<void(Image &)>;
     [[nodiscard]] GrayScaleTy GrayScaleFunc() const;
     using ThresholdTy = std::function<void(Image &)>;
     [[nodiscard]] ThresholdTy ThresholdFunc() const;
+    using AdapThresTy = std::function<void(Image &, int, int)>;
+    [[nodiscard]] AdapThresTy AdapThresFunc() const;
+
     using EqualizationTy = std::function<void(Image &)>;
     [[nodiscard]] EqualizationTy EqualizationFunc() const;
 

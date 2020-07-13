@@ -6,6 +6,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    InitDialogs();
 }
 
 MainWindow::~MainWindow() {
@@ -31,8 +32,11 @@ void MainWindow::BindGrayScale(const GrayScaleTy &func) {
 void MainWindow::BindThreshold(const ThresholdTy &func) {
     Threshold = func;
 }
+void MainWindow::BindAdapThres(const AdapThresTy &func) {
+    AdapThres = func;
+}
 
-void MainWindow::BindEqualization(const MainWindow::ThresholdTy &func) {
+void MainWindow::BindEqualization(const ThresholdTy &func) {
     Equalization = func;
 }
 
@@ -90,6 +94,16 @@ void MainWindow::OnThresholdBtn() {
     ShowImage();
 }
 
+void MainWindow::OnAdapThresBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    if (adap_thres_dialog->exec() == QDialog::Accepted) {
+        AdapThres(shown_image, params.block_size, params.bias);
+        ShowImage();
+    }
+}
+
 void MainWindow::OnEqualizationBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
@@ -126,3 +140,13 @@ void MainWindow::ShowImage() {
     SetGeoLabel(nx, ny);
 }
 
+void MainWindow::InitDialogs() {
+    adap_thres_dialog = std::make_unique<AdapThresDialog>();
+    connect(adap_thres_dialog.get(), &AdapThresDialog::SendParams,
+            this, &MainWindow::SetAdapThresParams);
+}
+
+void MainWindow::SetAdapThresParams(int block_size, int bias) {
+    params.block_size = block_size;
+    params.bias = bias;
+}

@@ -1,31 +1,17 @@
 #pragma once
 
-#include <iostream>
 #include <cassert>
 #include <cstdint>
+#include <memory>
 #include <string>
 #include <functional>
 
 #include <QWidget>
 #include "ui_MainWindow.h"
 
+#include "AdapThresDialog.h"
+
 #include "Image.h"
-
-// class Parameter{
-// public:
-//     Parameter();
-// };
-
-// class Command{
-// public:
-//     Command();
-//     void BindParameters(std::shared_ptr<Parameter> _parameters){
-//         parameters = _parameters;
-//     }
-//     virtual void run() = 0;
-// protected:
-//     std::shared_ptr<Parameter> parameters;
-// };
 
 class MainWindow : public QWidget {
     Q_OBJECT
@@ -47,6 +33,9 @@ class MainWindow : public QWidget {
     void BindGrayScale(const GrayScaleTy &func);
     using ThresholdTy = std::function<void(Image &)>;
     void BindThreshold(const ThresholdTy &func);
+    using AdapThresTy = std::function<void(Image &, int, int)>;
+    void BindAdapThres(const AdapThresTy &func);
+
     using EqualizationTy = std::function<void(Image &)>;
     void BindEqualization(const ThresholdTy &func);
 
@@ -64,10 +53,22 @@ class MainWindow : public QWidget {
 
     GrayScaleTy GrayScale;
     ThresholdTy Threshold;
+    AdapThresTy AdapThres;
+
     EqualizationTy Equalization;
+
+    std::unique_ptr<AdapThresDialog> adap_thres_dialog;
+
+    struct {
+        int block_size, bias;
+    } params;
+
+    void InitDialogs();
 
     void SetGeoLabel(int w, int h);
     void ShowImage();
+
+    void SetAdapThresParams(int block_size, int bias);
 
   private slots:
     void OnLoadBtn();
@@ -77,5 +78,7 @@ class MainWindow : public QWidget {
 
     void OnGrayScaleBtn();
     void OnThresholdBtn();
+    void OnAdapThresBtn();
+
     void OnEqualizationBtn();
 };

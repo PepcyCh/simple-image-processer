@@ -1,7 +1,5 @@
 # simple-image-processer
 
-## 小组
-
 * 组员：陈昱文、张辛宁、贺情怡
 * 选题：图像处理应用
 
@@ -46,11 +44,12 @@ Model
 
 View
 
-* UI
+* 绘制 UI 和链接按钮等的事件
+* 调用的只是一个 `std::function<>` 变量
 
 ViewModel
 
-* 持有 Model 并向 View 提供真正的函数（命令）
+* 持有 Model 并向 View 提供真正的函数（命令）内容
 
 App
 
@@ -59,7 +58,6 @@ App
 ### 迭代
 
 * [x] 第一轮迭代
-  * [x] Common
   * [x] 简单的界面
   * [x] 图像的导入导出
 * [ ] 第二轮迭代

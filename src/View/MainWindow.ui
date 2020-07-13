@@ -25,10 +25,22 @@
       <item>
        <widget class="QLabel" name="name_lb">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>20</height>
+         </size>
         </property>
         <property name="text">
          <string/>
@@ -44,6 +56,12 @@
          </sizepolicy>
         </property>
         <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>400</height>
+         </size>
+        </property>
+        <property name="maximumSize">
          <size>
           <width>400</width>
           <height>400</height>
@@ -95,8 +113,11 @@
       </item>
       <item>
        <widget class="QTabWidget" name="tabWidget">
+        <property name="tabPosition">
+         <enum>QTabWidget::West</enum>
+        </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_1">
          <attribute name="title">
@@ -107,7 +128,7 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>171</width>
+            <width>161</width>
             <height>231</height>
            </rect>
           </property>
@@ -236,7 +257,7 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>171</width>
+            <width>161</width>
             <height>83</height>
            </rect>
           </property>
@@ -274,7 +295,7 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>171</width>
+            <width>161</width>
             <height>112</height>
            </rect>
           </property>
@@ -358,8 +379,8 @@
    <slot>OnGrayScaleBtn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>516</x>
-     <y>109</y>
+     <x>612</x>
+     <y>99</y>
     </hint>
     <hint type="destinationlabel">
      <x>347</x>
@@ -391,7 +412,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>616</x>
-     <y>63</y>
+     <y>57</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -406,8 +427,8 @@
    <slot>OnThresholdBtn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>457</x>
-     <y>138</y>
+     <x>612</x>
+     <y>127</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -422,12 +443,28 @@
    <slot>OnEqualizationBtn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>505</x>
-     <y>178</y>
+     <x>612</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
      <x>703</x>
      <y>807</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>adpthr_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnAdapThresBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>621</x>
+     <y>186</y>
     </hint>
    </hints>
   </connection>
@@ -440,5 +477,6 @@
   <slot>OnRedoBtn()</slot>
   <slot>OnThresholdBtn()</slot>
   <slot>OnEqualizationBtn()</slot>
+  <slot>OnAdapThresBtn()</slot>
  </slots>
 </ui>

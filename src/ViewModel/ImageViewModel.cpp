@@ -79,6 +79,13 @@ ImageViewModel::ThresholdTy ImageViewModel::ThresholdFunc() const {
     };
 }
 
+ImageViewModel::AdapThresTy ImageViewModel::AdapThresFunc() const {
+    return [this](Image &img, int block_size, int bias) {
+        img = ImageUtil::AdaptiveThreshold(img, block_size, ImageUtil::MEAN, bias);
+        image_model->PushImage(img);
+    };
+}
+
 ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
     return [this](Image &img) {
         img = ImageUtil::HistogramEqualize(img);
