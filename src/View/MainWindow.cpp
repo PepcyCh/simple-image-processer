@@ -32,15 +32,19 @@ void MainWindow::BindThreshold(const ThresholdTy &func) {
     Threshold = func;
 }
 
+void MainWindow::BindEqualization(const MainWindow::ThresholdTy &func) {
+    Equalization = func;
+}
+
+
 void MainWindow::OnLoadBtn() {
-    auto filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
+    filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
     LoadImage(s, shown_image);
     if (shown_image.Empty()) {
         return;
     }
-    this->filename = filename;
     ShowImage();
     has_image = true;
 }
@@ -49,8 +53,7 @@ void MainWindow::OnSaveBtn() {
     if (!has_image) {
         return;
     }
-
-    auto filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
+    filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
 }
@@ -84,6 +87,14 @@ void MainWindow::OnThresholdBtn() {
         return;
     }
     Threshold(shown_image);
+    ShowImage();
+}
+
+void MainWindow::OnEqualizationBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    Equalization(shown_image);
     ShowImage();
 }
 

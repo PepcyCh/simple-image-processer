@@ -31,8 +31,8 @@ class MainWindow : public QWidget {
     Q_OBJECT
 
   public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
     using LoadImageTy = std::function<void(const std::string &, Image &)>;
     void BindLoadImage(const LoadImageTy &func);
@@ -47,6 +47,8 @@ class MainWindow : public QWidget {
     void BindGrayScale(const GrayScaleTy &func);
     using ThresholdTy = std::function<void(Image &)>;
     void BindThreshold(const ThresholdTy &func);
+    using EqualizationTy = std::function<void(Image &)>;
+    void BindEqualization(const ThresholdTy &func);
 
   private:
     Ui::MainWindow *ui;
@@ -62,6 +64,7 @@ class MainWindow : public QWidget {
 
     GrayScaleTy GrayScale;
     ThresholdTy Threshold;
+    EqualizationTy Equalization;
 
     void SetGeoLabel(int w, int h);
     void ShowImage();
@@ -74,4 +77,5 @@ class MainWindow : public QWidget {
 
     void OnGrayScaleBtn();
     void OnThresholdBtn();
+    void OnEqualizationBtn();
 };

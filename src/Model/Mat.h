@@ -7,7 +7,7 @@
 template <typename T>
 class Mat {
   public:
-    Mat(size_t rs = 1, size_t cs = 1, T filled = static_cast<T>(0)) : rs(rs), cs(cs) {
+    explicit Mat(size_t rs = 1, size_t cs = 1, T filled = static_cast<T>(0)) : rs(rs), cs(cs) {
         data = new T[rs * cs];
         std::fill(data, data + rs * cs, filled);
     }
@@ -40,8 +40,8 @@ class Mat {
         std::fill(data, data + rs * cs, filled);
     }
 
-    size_t Rows() const { return rs; }
-    size_t Cols() const { return cs; }
+    [[nodiscard]] size_t Rows() const { return rs; }
+    [[nodiscard]] size_t Cols() const { return cs; }
 
     T *operator[](size_t i) { return data + i * cs; }
     const T *operator[](size_t i) const { return data + i * cs; }

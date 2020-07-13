@@ -36,10 +36,7 @@ Image ImageUtil::Load(const std::string &filename, ImageType ty) {
 
     Image img(nx, ny, data, nn);
     stbi_image_free(data);
-
-    if (ty == IMG_TY_BMP) {
-        img = ImageUtil::MirrorX(img);
-    }
+    // Stbi will solve the reverse of bmp file.
     return img;
 }
 void ImageUtil::Save(const Image &img, const std::string &filename, ImageType ty) {

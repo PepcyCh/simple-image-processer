@@ -22,6 +22,8 @@ class ImageViewModel {
     [[nodiscard]] GrayScaleTy GrayScaleFunc() const;
     using ThresholdTy = std::function<void(Image &)>;
     [[nodiscard]] ThresholdTy ThresholdFunc() const;
+    using EqualizationTy = std::function<void(Image &)>;
+    [[nodiscard]] EqualizationTy EqualizationFunc() const;
 
   private:
     std::shared_ptr<ImageModel> image_model;

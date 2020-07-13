@@ -36,6 +36,7 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindUndoImage(image_view_model->UndoImageFunc());
     mainwindow->BindGrayScale(image_view_model->GrayScaleFunc());
     mainwindow->BindThreshold(image_view_model->ThresholdFunc());
+    mainwindow->BindEqualization(image_view_model->EqualizationFunc());
 }
 
 void APP::Run_APP() {

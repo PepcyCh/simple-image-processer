@@ -96,7 +96,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_1">
          <attribute name="title">
@@ -390,8 +390,8 @@
    <slot>OnRedoBtn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>39</y>
+     <x>616</x>
+     <y>63</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -415,6 +415,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>equ_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnEqualizationBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>703</x>
+     <y>807</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnLoadBtn()</slot>
@@ -423,5 +439,6 @@
   <slot>OnUndoBtn()</slot>
   <slot>OnRedoBtn()</slot>
   <slot>OnThresholdBtn()</slot>
+  <slot>OnEqualizationBtn()</slot>
  </slots>
 </ui>

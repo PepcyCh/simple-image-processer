@@ -78,3 +78,11 @@ ImageViewModel::ThresholdTy ImageViewModel::ThresholdFunc() const {
         image_model->PushImage(img);
     };
 }
+
+ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
+    return [this](Image &img) {
+        img = ImageUtil::HistogramEqualize(img);
+        image_model->PushImage(img);
+    };
+}
+

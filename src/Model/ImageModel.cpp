@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-Image ImageModel::PushImage(const Image &img) {
+void ImageModel::PushImage(const Image &img) {
     ++curr;
     if (curr == images.size()) {
         images.push_back(img);
@@ -10,7 +10,7 @@ Image ImageModel::PushImage(const Image &img) {
         images[curr] = img;
         images.resize(curr + 1);
     }
-    return img;
+    // return img;
 }
 
 Image ImageModel::GetCurrent() const {

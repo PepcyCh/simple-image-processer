@@ -6,15 +6,15 @@
 
 class ImageModel {
   public:
-    Image PushImage(const Image &img);
+    void PushImage(const Image &img);
     
-    Image GetCurrent() const;
-    Image GetPrevious() const;
+    [[nodiscard]] Image GetCurrent() const;
+    [[nodiscard]] Image GetPrevious() const;
 
     Image Undo();
-    bool CanUndo() const;
+    [[nodiscard]] bool CanUndo() const;
     Image Redo();
-    bool CanRedo() const;
+    [[nodiscard]] bool CanRedo() const;
 
     void Reset();
 

@@ -10,20 +10,20 @@ class Image {
     Image(size_t width, size_t height);
     Image(size_t width, size_t height, uint8_t *data, int n_channel);
 
-    bool Empty() const;
+    [[nodiscard]] bool Empty() const;
     void Resize(size_t width, size_t height);
     void Clear(uint8_t value = 0);
 
-    size_t GetWidth() const;
-    size_t GetHeight() const;
-    const uint8_t *GetData() const;
-    constexpr int GetChannelCnt() const { return 4; }
+    [[nodiscard]] size_t GetWidth() const;
+    [[nodiscard]] size_t GetHeight() const;
+    [[nodiscard]] const uint8_t *GetData() const;
+    [[nodiscard]] constexpr int GetChannelCnt() const { return 4; }
 
-    uint8_t Get(int x, int y, int i) const;
-    uint8_t GetR(int x, int y) const;
-    uint8_t GetG(int x, int y) const;
-    uint8_t GetB(int x, int y) const;
-    uint8_t GetA(int x, int y) const;
+    [[nodiscard]] uint8_t Get(int x, int y, int i) const;
+    [[nodiscard]] uint8_t GetR(int x, int y) const;
+    [[nodiscard]] uint8_t GetG(int x, int y) const;
+    [[nodiscard]] uint8_t GetB(int x, int y) const;
+    [[nodiscard]] uint8_t GetA(int x, int y) const;
 
     void SetColor(int x, int y, int i, uint8_t v);
     void SetColor(int x, int y, uint8_t r, uint8_t g, uint8_t b);
