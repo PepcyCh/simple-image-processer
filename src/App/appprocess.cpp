@@ -40,6 +40,8 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindAdapThres(image_view_model->AdapThresFunc());
 
     mainwindow->BindEqualization(image_view_model->EqualizationFunc());
+
+    mainwindow->BindScale(image_view_model->ScaleFunc()) ;
 }
 
 void APP::Run_APP() {

@@ -39,6 +39,9 @@ class MainWindow : public QWidget {
     using EqualizationTy = std::function<void(Image &)>;
     void BindEqualization(const ThresholdTy &func);
 
+    using ScaleTy = std::function<void(Image &, double, double)>;
+    void BindScale(const ScaleTy &func);
+
   private:
     Ui::MainWindow *ui;
 
@@ -56,6 +59,8 @@ class MainWindow : public QWidget {
     AdapThresTy AdapThres;
 
     EqualizationTy Equalization;
+
+    ScaleTy Scale;
 
     std::unique_ptr<AdapThresDialog> adap_thres_dialog;
 
@@ -79,6 +84,12 @@ class MainWindow : public QWidget {
     void OnGrayScaleBtn();
     void OnThresholdBtn();
     void OnAdapThresBtn();
+
+    void OnGeoWBtn() ;
+    void OnGeoHBtn() ;
+    void OnRotBtn() ;
+    void OnShrXBtn() ;
+    void OnShrYBtn() ;
 
     void OnEqualizationBtn();
 };

@@ -29,6 +29,9 @@ class ImageViewModel {
     using EqualizationTy = std::function<void(Image &)>;
     [[nodiscard]] EqualizationTy EqualizationFunc() const;
 
+    using ScaleTy = std::function<void(Image &, double, double)> ;
+    [[nodiscard]] ScaleTy ScaleFunc() const;
+
   private:
     std::shared_ptr<ImageModel> image_model;
 };

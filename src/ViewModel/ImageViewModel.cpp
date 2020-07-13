@@ -93,3 +93,9 @@ ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
     };
 }
 
+ImageViewModel::ScaleTy ImageViewModel::ScaleFunc() const {
+    return [this](Image &img, double sx, double sy) {
+        img = ImageUtil::Scale(img, sx, sy);
+        image_model->PushImage(img);
+    };
+}

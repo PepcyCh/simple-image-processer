@@ -40,6 +40,10 @@ void MainWindow::BindEqualization(const ThresholdTy &func) {
     Equalization = func;
 }
 
+void MainWindow::BindScale(const ScaleTy &func) {
+    Scale = func ;
+}
+
 
 void MainWindow::OnLoadBtn() {
     filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".",
@@ -111,6 +115,29 @@ void MainWindow::OnEqualizationBtn() {
     Equalization(shown_image);
     ShowImage();
 }
+
+void MainWindow::OnGeoWBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+
+    double w = shown_image.GetWidth(), w_ = ui -> geo_w_input -> text().toInt() ;
+    Scale(shown_image, 1.0, w_ / w ) ;
+    ShowImage() ;
+}
+void MainWindow::OnGeoHBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+
+    double h = shown_image.GetHeight(), h_ = ui -> geo_h_input -> text().toInt() ;
+    Scale(shown_image, h_ / h, 1.0) ;
+    ShowImage() ;
+}
+
+void MainWindow::OnRotBtn() {}
+void MainWindow::OnShrXBtn() {}
+void MainWindow::OnShrYBtn() {}
 
 void MainWindow::SetGeoLabel(int w, int h) {
     ui->geo_w_input->setText(QString::number(w));

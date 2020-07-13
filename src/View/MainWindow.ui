@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
+    <width>711</width>
     <height>490</height>
    </rect>
   </property>
@@ -15,7 +15,7 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>611</width>
+     <width>691</width>
      <height>471</height>
     </rect>
    </property>
@@ -128,46 +128,38 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>161</width>
-            <height>231</height>
+            <width>230</width>
+            <height>233</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="5" column="0">
-            <widget class="QSlider" name="geo_h_slider">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
+           <item row="5" column="2">
+            <widget class="QLineEdit" name="geo_h_input"/>
            </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="shr_lb">
+           <item row="10" column="1">
+            <widget class="QLabel" name="shr_y_lb">
              <property name="text">
-              <string>Shear</string>
+              <string>y</string>
              </property>
             </widget>
            </item>
            <item row="9" column="2">
             <widget class="QLineEdit" name="shr_x_input"/>
            </item>
-           <item row="5" column="1">
-            <widget class="QLabel" name="geo_h_lb">
+           <item row="10" column="2">
+            <widget class="QLineEdit" name="shr_y_input"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QCheckBox" name="geo_check">
              <property name="text">
-              <string>h</string>
+              <string>keep aspect</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
-            <widget class="QSlider" name="geo_w_slider">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0">
-            <widget class="QSlider" name="shr_x_slider">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+           <item row="4" column="1">
+            <widget class="QLabel" name="geo_w_lb">
+             <property name="text">
+              <string>w</string>
              </property>
             </widget>
            </item>
@@ -178,13 +170,20 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="2">
-            <widget class="QLineEdit" name="geo_h_input"/>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="geo_w_lb">
+           <item row="6" column="0">
+            <widget class="QLabel" name="rot_lb">
              <property name="text">
-              <string>w</string>
+              <string>Rotate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QLineEdit" name="rot_input"/>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="geo_h_lb">
+             <property name="text">
+              <string>h</string>
              </property>
             </widget>
            </item>
@@ -195,53 +194,52 @@
              </property>
             </widget>
            </item>
-           <item row="10" column="0">
-            <widget class="QSlider" name="shr_y_slider">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="2">
-            <widget class="QLineEdit" name="shr_y_input"/>
-           </item>
-           <item row="10" column="1">
-            <widget class="QLabel" name="shr_y_lb">
+           <item row="8" column="0">
+            <widget class="QLabel" name="shr_lb">
              <property name="text">
-              <string>y</string>
+              <string>Shear</string>
              </property>
             </widget>
            </item>
            <item row="4" column="2">
-            <widget class="QLineEdit" name="geo_w_input"/>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="rot_lb">
+            <widget class="QLineEdit" name="geo_w_input">
              <property name="text">
-              <string>Rotate</string>
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="geo_w_btn">
+             <property name="text">
+              <string>Set</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QPushButton" name="geo_h_btn">
+             <property name="text">
+              <string>Set</string>
              </property>
             </widget>
            </item>
            <item row="7" column="0">
-            <widget class="QSlider" name="rot_slider">
-             <property name="minimum">
-              <number>-180</number>
-             </property>
-             <property name="maximum">
-              <number>180</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+            <widget class="QPushButton" name="rot_btn">
+             <property name="text">
+              <string>Set</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="2">
-            <widget class="QLineEdit" name="rot_input"/>
-           </item>
-           <item row="3" column="2">
-            <widget class="QCheckBox" name="geo_check">
+           <item row="9" column="0">
+            <widget class="QPushButton" name="shr_x_btn">
              <property name="text">
-              <string>keep aspect</string>
+              <string>Set</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QPushButton" name="shr_y_btn">
+             <property name="text">
+              <string>Set</string>
              </property>
             </widget>
            </item>
@@ -258,7 +256,7 @@
             <x>10</x>
             <y>10</y>
             <width>161</width>
-            <height>83</height>
+            <height>98</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -296,7 +294,7 @@
             <x>10</x>
             <y>10</y>
             <width>161</width>
-            <height>112</height>
+            <height>132</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -428,7 +426,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>612</x>
-     <y>127</y>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -444,11 +442,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>612</x>
-     <y>155</y>
+     <y>189</y>
     </hint>
     <hint type="destinationlabel">
-     <x>703</x>
-     <y>807</y>
+     <x>678</x>
+     <y>489</y>
     </hint>
    </hints>
   </connection>
@@ -459,12 +457,92 @@
    <slot>OnAdapThresBtn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>144</y>
+     <x>612</x>
+     <y>189</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
      <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>geo_w_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnGeoWBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>815</x>
+     <y>133</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>geo_h_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnGeoHBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>748</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rot_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnRotBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>496</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>818</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shr_x_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnShrXBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
+     <y>276</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>881</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shr_y_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnShrYBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>849</x>
+     <y>310</y>
     </hint>
    </hints>
   </connection>
@@ -478,5 +556,10 @@
   <slot>OnThresholdBtn()</slot>
   <slot>OnEqualizationBtn()</slot>
   <slot>OnAdapThresBtn()</slot>
+  <slot>OnGeoWBtn()</slot>
+  <slot>OnGeoHBtn()</slot>
+  <slot>OnRotBtn()</slot>
+  <slot>OnShrXBtn()</slot>
+  <slot>OnShrYBtn()</slot>
  </slots>
 </ui>
