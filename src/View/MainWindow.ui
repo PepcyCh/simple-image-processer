@@ -117,7 +117,7 @@
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_1">
          <attribute name="title">
@@ -546,6 +546,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>sharpen_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnSharpenBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>989</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blur_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnBlurBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>516</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>911</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hist_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnHistBtn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>532</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>956</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnLoadBtn()</slot>
@@ -561,5 +609,8 @@
   <slot>OnRotBtn()</slot>
   <slot>OnShrXBtn()</slot>
   <slot>OnShrYBtn()</slot>
+  <slot>OnSharpenBtn()</slot>
+  <slot>OnBlurBtn()</slot>
+  <slot>OnHistBtn()</slot>
  </slots>
 </ui>

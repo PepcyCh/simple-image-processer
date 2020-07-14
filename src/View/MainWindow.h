@@ -37,7 +37,13 @@ class MainWindow : public QWidget {
     void BindAdapThres(const AdapThresTy &func);
 
     using EqualizationTy = std::function<void(Image &)>;
-    void BindEqualization(const ThresholdTy &func);
+    void BindEqualization(const EqualizationTy &func);
+    using SharpenTy = std::function<void(Image &)>;
+    void BindSharpen(const SharpenTy &func);
+    using BlurTy = std::function<void(Image &)>;
+    void BindBlur(const BlurTy &func);
+    using HistogramTy = std::function<void(Image &)>;
+    void BindHistogram(const HistogramTy &func);
 
     using ScaleTy = std::function<void(Image &, double, double)>;
     void BindScale(const ScaleTy &func);
@@ -48,6 +54,8 @@ class MainWindow : public QWidget {
     void BindShearX(const ShearXTy &func);
     using ShearYTy = std::function<void(Image &, double)>;
     void BindShearY(const ShearYTy &func);
+
+
 
   private:
     Ui::MainWindow *ui;
@@ -66,6 +74,9 @@ class MainWindow : public QWidget {
     AdapThresTy AdapThres;
 
     EqualizationTy Equalization;
+    SharpenTy Sharpen ;
+    BlurTy Blur ;
+    HistogramTy Histogram ;
 
     ScaleTy Scale;
     RotateTy Rotate ;
@@ -103,4 +114,7 @@ class MainWindow : public QWidget {
     void OnShrYBtn() ;
 
     void OnEqualizationBtn();
+    void OnSharpenBtn() ;
+    void OnHistBtn() ;
+    void OnBlurBtn() ;
 };

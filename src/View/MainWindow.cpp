@@ -36,8 +36,17 @@ void MainWindow::BindAdapThres(const AdapThresTy &func) {
     AdapThres = func;
 }
 
-void MainWindow::BindEqualization(const ThresholdTy &func) {
+void MainWindow::BindEqualization(const EqualizationTy &func) {
     Equalization = func;
+}
+void MainWindow::BindSharpen(const SharpenTy &func) {
+        Sharpen = func ;
+}
+void MainWindow::BindBlur(const BlurTy &func) {
+        Blur = func ;
+}
+void MainWindow::BindHistogram(const HistogramTy &func) {
+        Histogram = func ;
 }
 
 void MainWindow::BindScale(const ScaleTy &func) {
@@ -123,6 +132,16 @@ void MainWindow::OnEqualizationBtn() {
     }
     Equalization(shown_image);
     ShowImage();
+}
+
+void MainWindow::OnSharpenBtn() {
+
+}
+void MainWindow::OnHistBtn() {
+
+}
+void MainWindow::OnBlurBtn() {
+
 }
 
 void MainWindow::OnGeoWBtn() {
