@@ -73,6 +73,7 @@ void MainWindow::OnSaveBtn() {
     filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
+    ui->name_lb->setText(filename);
 }
 
 void MainWindow::OnUndoBtn() {
