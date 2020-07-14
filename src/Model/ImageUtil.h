@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <array>
+#include <vector>
 
 #include "Image.h"
 #include "Mat.h"
@@ -56,6 +58,7 @@ class ImageUtil {
 
     static std::vector<double> GetHistogram(const Image &img);
     static std::vector<double> GetHistogram(const Image &img, int cid);
+    static std::array<Image, 4> GetHistogramImage(const Image &img);
     static Image HistogramEqualize(const Image &img);
     static Image HistogramFit(const Image &img, const std::vector<double> &hist);
     static Image HistogramFit(const Image &img, const std::vector<double> &hist, int cid);

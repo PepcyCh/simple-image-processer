@@ -1,6 +1,7 @@
 add_library(view
     MainWindow.cpp
     AdapThresDialog.cpp
+    HistogramDialog.cpp
 )
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)

@@ -11,6 +11,7 @@
 #include "ui_MainWindow.h"
 
 #include "AdapThresDialog.h"
+#include "HistogramDialog.h"
 
 #include "Image.h"
 
@@ -43,7 +44,7 @@ class MainWindow : public QWidget {
     void BindSharpen(const SharpenTy &func);
     using BlurTy = std::function<void(Image &)>;
     void BindBlur(const BlurTy &func);
-    using HistogramTy = std::function<void(Image &)>;
+    using HistogramTy = std::function<void(std::array<Image, 4> &)>;
     void BindHistogram(const HistogramTy &func);
 
     using ScaleTy = std::function<void(Image &, double, double)>;
@@ -55,8 +56,6 @@ class MainWindow : public QWidget {
     void BindShearX(const ShearXTy &func);
     using ShearYTy = std::function<void(Image &, double)>;
     void BindShearY(const ShearYTy &func);
-
-
 
   private:
     Ui::MainWindow *ui;
@@ -86,6 +85,7 @@ class MainWindow : public QWidget {
     ShearYTy ShearY ;
 
     std::unique_ptr<AdapThresDialog> adap_thres_dialog;
+    std::unique_ptr<HistogramDialog> histogram_dialog;
 
     struct {
         int block_size, bias;

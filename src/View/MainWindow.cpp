@@ -41,13 +41,13 @@ void MainWindow::BindEqualization(const EqualizationTy &func) {
     Equalization = func;
 }
 void MainWindow::BindSharpen(const SharpenTy &func) {
-        Sharpen = func ;
+    Sharpen = func ;
 }
 void MainWindow::BindBlur(const BlurTy &func) {
-        Blur = func ;
+    Blur = func ;
 }
 void MainWindow::BindHistogram(const HistogramTy &func) {
-        Histogram = func ;
+    Histogram = func ;
 }
 
 void MainWindow::BindScale(const ScaleTy &func) {
@@ -139,9 +139,17 @@ void MainWindow::OnEqualizationBtn() {
 void MainWindow::OnSharpenBtn() {
 
 }
-void MainWindow::OnHistBtn() {
 
+void MainWindow::OnHistBtn() {
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    std::array<Image, 4> imgs;
+    Histogram(imgs);
+    histogram_dialog->SetImages(imgs);
+    histogram_dialog->exec();
 }
+
 void MainWindow::OnBlurBtn() {
 
 }
@@ -220,6 +228,8 @@ void MainWindow::InitDialogs() {
     adap_thres_dialog = std::make_unique<AdapThresDialog>();
     connect(adap_thres_dialog.get(), &AdapThresDialog::SendParams,
             this, &MainWindow::SetAdapThresParams);
+
+    histogram_dialog = std::make_unique<HistogramDialog>();
 }
 
 void MainWindow::InitShortcuts() {

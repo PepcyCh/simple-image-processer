@@ -94,6 +94,12 @@ ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
     };
 }
 
+ImageViewModel::HistogramTy ImageViewModel::HistogramFunc() const {
+    return [this](std::array<Image, 4> &imgs) {
+        imgs = ImageUtil::GetHistogramImage(image_model->GetCurrent());
+    };
+}
+
 ImageViewModel::ScaleTy ImageViewModel::ScaleFunc() const {
     return [this](Image &img, double sx, double sy) {
         img = ImageUtil::Scale(img, sx, sy);

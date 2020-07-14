@@ -32,6 +32,13 @@ void TestImage(const std::string &filename, const std::string &suf, ImageUtil::I
     ImageUtil::Save(ImageUtil::Scale(img, 0.4, 0.5), filename + "_scl" + suf, ty);
     ImageUtil::Save(ImageUtil::ShearX(img, 50), filename + "_shrx" + suf, ty);
     ImageUtil::Save(ImageUtil::ShearY(img, 50), filename + "_shry" + suf, ty);
+    
+    // histogram
+    auto hist_imgs = ImageUtil::GetHistogramImage(img);
+    ImageUtil::Save(hist_imgs[0], filename + "_hist.png", ImageUtil::IMG_TY_PNG);
+    ImageUtil::Save(hist_imgs[1], filename + "_hist_r.png", ImageUtil::IMG_TY_PNG);
+    ImageUtil::Save(hist_imgs[2], filename + "_hist_g.png", ImageUtil::IMG_TY_PNG);
+    ImageUtil::Save(hist_imgs[3], filename + "_hist_b.png", ImageUtil::IMG_TY_PNG);
 }
 
 int main() {

@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <functional>
+#include <array>
 
 #include "ImageModel.h"
 
@@ -28,6 +29,8 @@ class ImageViewModel {
 
     using EqualizationTy = std::function<void(Image &)>;
     [[nodiscard]] EqualizationTy EqualizationFunc() const;
+    using HistogramTy = std::function<void(std::array<Image, 4> &)>;
+    [[nodiscard]] HistogramTy HistogramFunc() const;
 
     using ScaleTy = std::function<void(Image &, double, double)> ;
     [[nodiscard]] ScaleTy ScaleFunc() const;

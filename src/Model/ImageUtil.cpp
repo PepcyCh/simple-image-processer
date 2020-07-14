@@ -204,7 +204,7 @@ Image ImageUtil::OtsuThreshold(const Image &img) {
     for (int i = 0; i < res.GetHeight(); i++) {
         for (int j = 0; j < res.GetWidth(); j++) {
             uint8_t c = (res.GetR(i, j) > threshold ? 255 : 0);
-            res.SetColor(i, j, c, c, c);
+            res.SetColor(i, j, c, c, c, res.GetA(i, j));
         }
     }
 
@@ -241,7 +241,7 @@ Image ImageUtil::AdaptiveThreshold(const Image &img, int block_size, AdaptiveThr
             }
             sum = sum / cnt - minus;
             uint8_t value = temp.Get(i, j, 0) >= sum ? 255 : 0;
-            res.SetColor(i, j, value, value, value);
+            res.SetColor(i, j, value, value, value, img.GetA(i, j));
         }
     }
 
@@ -537,6 +537,30 @@ std::vector<double> ImageUtil::GetHistogram(const Image &img, int cid) {
         i /= N;
     }
     return hist;
+}
+
+static Image GetHistogramImageFromVector(const std::vector<double> &vec, uint8_t r, uint8_t g, uint8_t b) {
+    Image img(258, 66);
+    double max = *std::max_element(vec.begin(), vec.end());
+    if (max <= std::numeric_limits<double>::epsilon()) {
+        return img;
+    }
+    for (int i = 0; i < 256; i++) {
+        int h = vec[i] / max * 64;
+        for (int j = 0; j < h; j++) {
+            img.SetColor(64 - j, i + 1, r, g, b);
+        }
+    }
+    return img;
+}
+
+std::array<Image, 4> ImageUtil::GetHistogramImage(const Image &img) {
+    std::array<Image, 4> imgs;
+    imgs[0] = GetHistogramImageFromVector(GetHistogram(img), 180, 180, 180);
+    imgs[1] = GetHistogramImageFromVector(GetHistogram(img, 0), 240, 15, 15);
+    imgs[2] = GetHistogramImageFromVector(GetHistogram(img, 1), 15, 240, 15);
+    imgs[3] = GetHistogramImageFromVector(GetHistogram(img, 2), 15, 15, 240);
+    return imgs;
 }
 
 Image ImageUtil::HistogramEqualize(const Image &img) {
