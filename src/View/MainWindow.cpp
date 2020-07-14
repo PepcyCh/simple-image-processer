@@ -155,7 +155,10 @@ void MainWindow::OnHistBtn() {
 }
 
 void MainWindow::OnBlurBtn() {
-
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    blur_dialog->show()  ;
 }
 
 void MainWindow::OnGeoWBtn() {

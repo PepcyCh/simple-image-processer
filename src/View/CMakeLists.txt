@@ -1,5 +1,6 @@
 add_library(view
     MainWindow.cpp
+    BlurDialog.cpp
     AdapThresDialog.cpp
     HistogramDialog.cpp
 )

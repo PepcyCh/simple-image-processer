@@ -12,6 +12,7 @@
 
 #include "AdapThresDialog.h"
 #include "HistogramDialog.h"
+#include "BlurDialog.h"
 
 #include "Image.h"
 
@@ -86,6 +87,7 @@ class MainWindow : public QWidget {
 
     std::unique_ptr<AdapThresDialog> adap_thres_dialog;
     std::unique_ptr<HistogramDialog> histogram_dialog;
+    std::unique_ptr<BlurDialog> blur_dialog;
 
     struct {
         int block_size, bias;
