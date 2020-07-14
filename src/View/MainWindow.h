@@ -7,6 +7,7 @@
 #include <functional>
 
 #include <QWidget>
+#include <QShortcut>
 #include "ui_MainWindow.h"
 
 #include "AdapThresDialog.h"
@@ -91,6 +92,7 @@ class MainWindow : public QWidget {
     } params;
 
     void InitDialogs();
+    void InitShortcuts();
 
     void SetGeoLabel(int w, int h);
     void ShowImage();

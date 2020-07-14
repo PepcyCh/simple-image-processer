@@ -7,6 +7,7 @@
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     InitDialogs();
+    InitShortcuts();
 }
 
 MainWindow::~MainWindow() {
@@ -82,6 +83,7 @@ void MainWindow::OnSaveBtn() {
     filename = QFileDialog::getSaveFileName(this, tr("Save Image"), ".",
         tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     SaveImage(std::string(filename.toLocal8Bit())); // fix a bug here. (DON'T use toStdString)
+    ui->name_lb->setText(filename);
 }
 
 void MainWindow::OnUndoBtn() {
@@ -218,6 +220,13 @@ void MainWindow::InitDialogs() {
     adap_thres_dialog = std::make_unique<AdapThresDialog>();
     connect(adap_thres_dialog.get(), &AdapThresDialog::SendParams,
             this, &MainWindow::SetAdapThresParams);
+}
+
+void MainWindow::InitShortcuts() {
+    ui->load_btn->setShortcut(QKeySequence::Open);
+    ui->save_btn->setShortcut(QKeySequence::Save);
+    ui->undo_btn->setShortcut(QKeySequence::Undo);
+    ui->redo_btn->setShortcut(QKeySequence::Redo);
 }
 
 void MainWindow::SetAdapThresParams(int block_size, int bias) {
