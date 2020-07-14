@@ -50,6 +50,19 @@ void MainWindow::BindHistogram(const HistogramTy &func) {
     Histogram = func ;
 }
 
+void MainWindow::BindMeans(const MeansTy &func) {
+    Means = func ;
+}
+void MainWindow::BindMedian(const MedianTy &func) {
+    Median = func ;
+}
+void MainWindow::BindGauss(const GaussTy &func) {
+    Gauss = func ;
+}
+void MainWindow::BindBilateral(const BilateralTy &func) {
+    Bilateral = func ;
+}
+
 void MainWindow::BindScale(const ScaleTy &func) {
     Scale = func ;
 }

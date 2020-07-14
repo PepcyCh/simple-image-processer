@@ -34,6 +34,15 @@ class ImageViewModel {
     using HistogramTy = std::function<void(std::array<Image, 4> &)>;
     [[nodiscard]] HistogramTy HistogramFunc() const;
 
+    using MedianTy = std::function<void(Image &, int, int)> ;
+    [[nodiscard]] MedianTy MedianFunc() const;
+    using MeansTy = std::function<void(Image &, int, int)> ;
+    [[nodiscard]] MeansTy MeansFunc() const;
+    using GaussTy = std::function<void(Image &, int, double, int)> ;
+    [[nodiscard]] GaussTy GaussFunc() const;
+    using BilateralTy = std::function<void(Image &, int, double, double, int)> ;
+    [[nodiscard]] BilateralTy BilateralFunc() const;
+
     using ScaleTy = std::function<void(Image &, double, double)> ;
     [[nodiscard]] ScaleTy ScaleFunc() const;
     using RotateTy = std::function<void(Image &, double)> ;
@@ -42,6 +51,7 @@ class ImageViewModel {
     [[nodiscard]] ShearXTy ShearXFunc() const;
     using ShearYTy = std::function<void(Image &, double)> ;
     [[nodiscard]] ShearYTy ShearYFunc() const;
+
 
   private:
     std::shared_ptr<ImageModel> image_model;

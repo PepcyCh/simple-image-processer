@@ -43,6 +43,11 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindHistogram(image_view_model->HistogramFunc());
     mainwindow->BindSharpen(image_view_model->SharpenFunc()) ;
 
+    mainwindow->BindGauss(image_view_model->GaussFunc()) ;
+    mainwindow->BindMedian(image_view_model->MedianFunc()) ;
+    mainwindow->BindMeans(image_view_model->MeansFunc()) ;
+    mainwindow->BindBilateral(image_view_model->BilateralFunc()) ;
+
     mainwindow->BindScale(image_view_model->ScaleFunc()) ;
     mainwindow->BindRotate(image_view_model->RotateFunc()) ;
     mainwindow->BindShearX(image_view_model->ShearXFunc()) ;

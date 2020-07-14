@@ -108,6 +108,31 @@ ImageViewModel::HistogramTy ImageViewModel::HistogramFunc() const {
     };
 }
 
+ImageViewModel::MedianTy ImageViewModel::MedianFunc() const {
+    return [this](Image &img, int block_size, int iteration) {
+        img = ImageUtil::Median(img, block_size, iteration);
+        image_model->PushImage(img);
+    };
+}
+ImageViewModel::MeansTy ImageViewModel::MeansFunc() const {
+    return [this](Image &img, int block_size, int iteration) {
+        img = ImageUtil::Means(img, block_size, iteration);
+        image_model->PushImage(img);
+    };
+}
+ImageViewModel::GaussTy ImageViewModel::GaussFunc() const {
+    return [this](Image &img, int block_size, double sigma, int iteration) {
+        img = ImageUtil::Gaussian(img, block_size, sigma, iteration);
+        image_model->PushImage(img);
+    };
+}
+ImageViewModel::BilateralTy ImageViewModel::BilateralFunc() const {
+    return [this](Image &img, int block_size, double sigma_s, double sigma_r, int iteration) {
+        img = ImageUtil::Bilateral(img, block_size, sigma_s, sigma_r, iteration);
+        image_model->PushImage(img);
+    };
+}
+
 ImageViewModel::ScaleTy ImageViewModel::ScaleFunc() const {
     return [this](Image &img, double sx, double sy) {
         img = ImageUtil::Scale(img, sx, sy);
