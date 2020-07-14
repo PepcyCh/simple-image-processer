@@ -158,7 +158,10 @@ void MainWindow::OnBlurBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
     }
-    blur_dialog->show()  ;
+    if (blur_dialog->exec() == QDialog::Accepted) {
+
+        ShowImage();
+    }
 }
 
 void MainWindow::OnGeoWBtn() {

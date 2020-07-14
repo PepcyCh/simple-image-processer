@@ -58,6 +58,16 @@ class MainWindow : public QWidget {
     using ShearYTy = std::function<void(Image &, double)>;
     void BindShearY(const ShearYTy &func);
 
+    using MedianTy = std::function<void(Image &, int, int)>;
+    void BindMedian(const MedianTy &func);
+    using MeansTy = std::function<void(Image &, int, int)>;
+    void BindMeans(const MeansTy &func);
+    using GaussTy = std::function<void(Image &, int, double, int)>;
+    void BindGauss(const GaussTy &func);
+    using BilateralTy = std::function<void(Image &, int, double, double, int)>;
+    void BindBilateral(const BilateralTy &func);
+
+
   private:
     Ui::MainWindow *ui;
 
@@ -84,6 +94,12 @@ class MainWindow : public QWidget {
 
     ShearXTy ShearX ;
     ShearYTy ShearY ;
+
+    MedianTy Median ;
+    MeansTy Means ;
+    GaussTy Gauss ;
+    BilateralTy Bilateral ;
+
 
     std::unique_ptr<AdapThresDialog> adap_thres_dialog;
     std::unique_ptr<HistogramDialog> histogram_dialog;

@@ -12,9 +12,16 @@ class BlurDialog : public QDialog {
 
     void accept() override;
 
+  signals:
+    void SendParams(int block_size, int tim, double sigma_0, double sigma_1);
+
   private:
     Ui::Dialog *ui;
-  
+    int bs, tim ;
+    double sigma[2] ;
+    int opt ;   
+    // 00 -> Median, 01 -> Means, 10 -> Gauss, 11 -> Bilateral
+
     void InitBlurDialog();
     
   private slots:
