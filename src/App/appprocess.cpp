@@ -41,6 +41,7 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
 
     mainwindow->BindEqualization(image_view_model->EqualizationFunc());
     mainwindow->BindHistogram(image_view_model->HistogramFunc());
+    mainwindow->BindSharpen(image_view_model->SharpenFunc()) ;
 
     mainwindow->BindScale(image_view_model->ScaleFunc()) ;
     mainwindow->BindRotate(image_view_model->RotateFunc()) ;

@@ -40,7 +40,7 @@ class MainWindow : public QWidget {
 
     using EqualizationTy = std::function<void(Image &)>;
     void BindEqualization(const EqualizationTy &func);
-    using SharpenTy = std::function<void(Image &)>;
+    using SharpenTy = std::function<void(Image &, double C)>;
     void BindSharpen(const SharpenTy &func);
     using BlurTy = std::function<void(Image &)>;
     void BindBlur(const BlurTy &func);

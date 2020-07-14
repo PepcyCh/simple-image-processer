@@ -29,6 +29,8 @@ class ImageViewModel {
 
     using EqualizationTy = std::function<void(Image &)>;
     [[nodiscard]] EqualizationTy EqualizationFunc() const;
+    using SharpenTy = std::function<void(Image &, double)>;
+    [[nodiscard]] SharpenTy SharpenFunc() const;
     using HistogramTy = std::function<void(std::array<Image, 4> &)>;
     [[nodiscard]] HistogramTy HistogramFunc() const;
 

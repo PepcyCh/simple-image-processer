@@ -137,7 +137,11 @@ void MainWindow::OnEqualizationBtn() {
 }
 
 void MainWindow::OnSharpenBtn() {
-
+    if (!has_image || shown_image.Empty()) {
+        return;
+    }
+    Sharpen(shown_image, 1);
+    ShowImage();
 }
 
 void MainWindow::OnHistBtn() {

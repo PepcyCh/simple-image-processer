@@ -94,6 +94,14 @@ ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
     };
 }
 
+
+ImageViewModel::SharpenTy ImageViewModel::SharpenFunc() const {
+    return [this](Image &img, double C) {
+        img = ImageUtil::Laplacian(img, C);
+        image_model->PushImage(img);
+    };
+}
+
 ImageViewModel::HistogramTy ImageViewModel::HistogramFunc() const {
     return [this](std::array<Image, 4> &imgs) {
         imgs = ImageUtil::GetHistogramImage(image_model->GetCurrent());
