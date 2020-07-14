@@ -48,6 +48,6 @@ void BlurDialog::OnBiBtn(){
 }
 
 void BlurDialog::accept() {
-    emit SendParams(bs, tim, sigma[0], sigma[1]) ;
+    emit SendParams(opt, bs, tim, sigma[0], sigma[1]) ;
     QDialog::accept();
 }

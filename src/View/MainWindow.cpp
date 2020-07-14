@@ -172,7 +172,24 @@ void MainWindow::OnBlurBtn() {
         return;
     }
     if (blur_dialog->exec() == QDialog::Accepted) {
-
+        switch(BlurParams.opt) {
+                case -1:
+                        break ;
+                case 0:
+                        Median(shown_image, BlurParams.block_size, BlurParams.tim) ;
+                        break ;
+                case 1:
+                        Means(shown_image, BlurParams.block_size, BlurParams.tim) ;
+                        break ;
+                case 2:
+                        Gauss(shown_image, BlurParams.block_size, BlurParams.sigma[0], BlurParams.tim) ;
+                        break ;
+                case 3:
+                        Bilateral(shown_image, BlurParams.block_size, BlurParams.sigma[0], BlurParams.sigma[1], BlurParams.tim) ;
+                        break ;
+                default:
+                        break ;
+        }
         ShowImage();
     }
 }
@@ -251,6 +268,8 @@ void MainWindow::InitDialogs() {
     adap_thres_dialog = std::make_unique<AdapThresDialog>();
     connect(adap_thres_dialog.get(), &AdapThresDialog::SendParams,
             this, &MainWindow::SetAdapThresParams);
+    connect(blur_dialog.get(), &BlurDialog::SendParams,
+            this, &MainWindow::SetBlurParams);
 
     histogram_dialog = std::make_unique<HistogramDialog>();
     blur_dialog = std::make_unique<BlurDialog>();
@@ -266,4 +285,11 @@ void MainWindow::InitShortcuts() {
 void MainWindow::SetAdapThresParams(int block_size, int bias) {
     params.block_size = block_size;
     params.bias = bias;
+}
+void MainWindow::SetBlurParams(int opt, int block_size, int tim, double sigma_0, double sigma_1) {
+    BlurParams.opt = opt ;
+    BlurParams.block_size = block_size ;
+    BlurParams.tim = tim ;
+    BlurParams.sigma[0] = sigma_0 ;
+    BlurParams.sigma[1] = sigma_1 ;
 }

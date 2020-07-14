@@ -13,7 +13,7 @@ class BlurDialog : public QDialog {
     void accept() override;
 
   signals:
-    void SendParams(int block_size, int tim, double sigma_0, double sigma_1);
+    void SendParams(int opt, int block_size, int tim, double sigma_0, double sigma_1);
 
   private:
     Ui::Dialog *ui;

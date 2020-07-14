@@ -108,6 +108,10 @@ class MainWindow : public QWidget {
     struct {
         int block_size, bias;
     } params;
+    struct {
+            int opt, block_size, tim ;
+            double sigma[2] ;
+    } BlurParams ;
 
     void InitDialogs();
     void InitShortcuts();
@@ -116,6 +120,7 @@ class MainWindow : public QWidget {
     void ShowImage();
 
     void SetAdapThresParams(int block_size, int bias);
+    void SetBlurParams(int opt, int block_size, int tim, double sigma_0, double sigma_1) ;
 
   private slots:
     void OnLoadBtn();
