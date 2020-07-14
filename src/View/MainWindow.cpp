@@ -237,6 +237,7 @@ void MainWindow::InitDialogs() {
             this, &MainWindow::SetAdapThresParams);
 
     histogram_dialog = std::make_unique<HistogramDialog>();
+    blur_dialog = std::make_unique<BlurDialog>();
 }
 
 void MainWindow::InitShortcuts() {
