@@ -2,7 +2,7 @@
 
 #include "appprocess.h"
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv) { // RUN_APP
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication qapp(argc, argv);
 
