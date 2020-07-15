@@ -200,16 +200,28 @@ void MainWindow::OnGeoWBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
     }
-    double w = shown_image.GetWidth(), w_ = ui -> geo_w_input -> text().toInt() ;
-    Scale(shown_image, 1.0, w_ / w ) ;
+    double w = shown_image.GetWidth(), w_ = ui -> geo_w_input -> text().toInt();
+    double ratio = w_ / w;
+    if (ui->geo_check->checkState() == Qt::Checked) {
+        Scale(shown_image, ratio, ratio);
+        SetGeoLabel(shown_image.GetWidth(), shown_image.GetHeight());
+    } else {
+        Scale(shown_image, 1.0, ratio);
+    }
     ShowImage() ;
 }
 void MainWindow::OnGeoHBtn() {
     if (!has_image || shown_image.Empty()) {
         return;
     }
-    double h = shown_image.GetHeight(), h_ = ui -> geo_h_input -> text().toInt() ;
-    Scale(shown_image, h_ / h, 1.0) ;
+    double h = shown_image.GetHeight(), h_ = ui -> geo_h_input -> text().toInt();
+    double ratio = h_ / h;
+    if (ui->geo_check->checkState() == Qt::Checked) {
+        Scale(shown_image, ratio, ratio);
+        SetGeoLabel(shown_image.GetWidth(), shown_image.GetHeight());
+    } else {
+        Scale(shown_image, ratio, 1.0);
+    }
     ShowImage() ;
 }
 
