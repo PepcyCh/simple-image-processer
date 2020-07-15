@@ -23,6 +23,8 @@ private:
     void BindMainWindow(const std::shared_ptr<MainWindow> &_mainwindow);
     void ReleaseMainWindow();
 
+    void BindCommands();
+
 private:
     std::shared_ptr<ImageModel> image_model;
     std::shared_ptr<ImageViewModel> image_view_model;

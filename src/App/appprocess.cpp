@@ -24,12 +24,8 @@ void APP::ReleaseMainWindow() {
     mainwindow.reset();
 }
 
-APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), image_model(new ImageModel) {
-    // mainwindow: view.
-    image_view_model->BindModel(image_model);
-    // Bind Model.
+void APP::BindCommands() {
 
-    //Bind Commands.
     mainwindow->BindLoadImage(image_view_model->LoadImageFunc());
     mainwindow->BindSaveImage(image_view_model->SaveImageFunc());
     mainwindow->BindRedoImage(image_view_model->RedoImageFunc());
@@ -52,6 +48,11 @@ APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), im
     mainwindow->BindRotate(image_view_model->RotateFunc()) ;
     mainwindow->BindShearX(image_view_model->ShearXFunc()) ;
     mainwindow->BindShearY(image_view_model->ShearYFunc()) ;
+}
+
+APP::APP(): mainwindow(new MainWindow), image_view_model(new ImageViewModel), image_model(new ImageModel) {
+    image_view_model->BindModel(image_model); // Bind Model.
+    this->BindCommands(); //Bind Commands.
 }
 
 void APP::Run_APP() {

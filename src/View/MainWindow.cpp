@@ -45,9 +45,7 @@ void MainWindow::BindEqualization(const EqualizationTy &func) {
 void MainWindow::BindSharpen(const SharpenTy &func) {
     Sharpen = func ;
 }
-void MainWindow::BindBlur(const BlurTy &func) {
-    Blur = func ;
-}
+
 void MainWindow::BindHistogram(const HistogramTy &func) {
     Histogram = func ;
 }

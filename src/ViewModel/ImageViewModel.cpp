@@ -8,7 +8,7 @@ static ImageUtil::ImageType GetImageType(const std::string &filename) {
     auto suffix = filename.substr(pos + 1, filename.size());
     if (suffix == "jpg" || suffix == "jpeg") {
         return ImageUtil::IMG_TY_JPG;
-    } else if (suffix == "png") { // Don't identify png? That's weird.
+    } else if (suffix == "png") {
         return ImageUtil::IMG_TY_PNG;
     } else if (suffix == "bmp") {
         return ImageUtil::IMG_TY_BMP;

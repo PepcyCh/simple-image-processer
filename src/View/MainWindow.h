@@ -43,8 +43,6 @@ class MainWindow : public QWidget {
     void BindEqualization(const EqualizationTy &func);
     using SharpenTy = std::function<void(Image &, double C)>;
     void BindSharpen(const SharpenTy &func);
-    using BlurTy = std::function<void(Image &)>;
-    void BindBlur(const BlurTy &func);
     using HistogramTy = std::function<void(std::array<Image, 4> &)>;
     void BindHistogram(const HistogramTy &func);
 
@@ -86,7 +84,6 @@ class MainWindow : public QWidget {
 
     EqualizationTy Equalization;
     SharpenTy Sharpen ;
-    BlurTy Blur ;
     HistogramTy Histogram ;
 
     ScaleTy Scale;
