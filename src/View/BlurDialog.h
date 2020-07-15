@@ -16,7 +16,7 @@ class BlurDialog : public QDialog {
     void SendParams(int opt, int block_size, int tim, double sigma_0, double sigma_1);
 
   private:
-    Ui::Dialog *ui;
+    Ui::BlurDialog *ui;
     int bs, tim ;
     double sigma[2] ;
     int opt ;   

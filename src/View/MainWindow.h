@@ -115,14 +115,15 @@ class MainWindow : public QWidget {
 
     void InitDialogs();
     void InitShortcuts();
+    void InitValidators();
 
     void SetGeoLabel(int w, int h);
     void ShowImage();
 
+  private slots:
     void SetAdapThresParams(int block_size, int bias);
     void SetBlurParams(int opt, int block_size, int tim, double sigma_0, double sigma_1) ;
 
-  private slots:
     void OnLoadBtn();
     void OnSaveBtn();
     void OnUndoBtn();

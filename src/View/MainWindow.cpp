@@ -3,11 +3,13 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QDebug>
+#include <QIntValidator>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     InitDialogs();
     InitShortcuts();
+    InitValidators();
 }
 
 MainWindow::~MainWindow() {
@@ -268,11 +270,11 @@ void MainWindow::InitDialogs() {
     adap_thres_dialog = std::make_unique<AdapThresDialog>();
     connect(adap_thres_dialog.get(), &AdapThresDialog::SendParams,
             this, &MainWindow::SetAdapThresParams);
-    connect(blur_dialog.get(), &BlurDialog::SendParams,
-            this, &MainWindow::SetBlurParams);
 
     histogram_dialog = std::make_unique<HistogramDialog>();
     blur_dialog = std::make_unique<BlurDialog>();
+    connect(blur_dialog.get(), &BlurDialog::SendParams,
+            this, &MainWindow::SetBlurParams);
 }
 
 void MainWindow::InitShortcuts() {
@@ -280,6 +282,14 @@ void MainWindow::InitShortcuts() {
     ui->save_btn->setShortcut(QKeySequence::Save);
     ui->undo_btn->setShortcut(QKeySequence::Undo);
     ui->redo_btn->setShortcut(QKeySequence::Redo);
+}
+
+void MainWindow::InitValidators() {
+    ui->geo_w_input->setValidator(new QIntValidator(1, 9999, this));
+    ui->geo_h_input->setValidator(new QIntValidator(1, 9999, this));
+    ui->rot_input->setValidator(new QIntValidator(-180, 180, this));
+    ui->shr_x_input->setValidator(new QIntValidator(-999, 999, this));
+    ui->shr_y_input->setValidator(new QIntValidator(-999, 999, this));
 }
 
 void MainWindow::SetAdapThresParams(int block_size, int bias) {

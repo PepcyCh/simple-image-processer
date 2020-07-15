@@ -12,7 +12,7 @@ AdapThresDialog::~AdapThresDialog() {
 }
 
 void AdapThresDialog::SetInputValidator() {
-    ui->radius_input->setValidator(new QIntValidator(1, 99, this));
+    ui->radius_input->setValidator(new QIntValidator(1, 49, this));
     ui->bias_input->setValidator(new QIntValidator(-128, 127, this));
 }
 
