@@ -38,9 +38,9 @@ void BlurDialog::InitBlurDialog() {
         ui -> gau_tim_input -> setValidator(new QIntValidator(1, 5, this));
         ui -> bi_tim_input -> setValidator(new QIntValidator(1, 5, this));
 
-        ui -> gau_sig_input -> setValidator(new QDoubleValidator(0, 999.99, 2, this));
-        ui -> bi_s_input -> setValidator(new QDoubleValidator(0, 999.99, 2, this));
-        ui -> bi_r_input -> setValidator(new QDoubleValidator(0, 999.99, 2, this));
+        ui -> gau_sig_input -> setValidator(new QDoubleValidator(0, 99999.99, 2, this));
+        ui -> bi_s_input -> setValidator(new QDoubleValidator(0, 99999.99, 2, this));
+        ui -> bi_r_input -> setValidator(new QDoubleValidator(0, 99999.99, 2, this));
 }
 void BlurDialog::OnMedBtn(){
         opt = 0;
