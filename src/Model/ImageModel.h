@@ -8,12 +8,11 @@ class ImageModel {
   public:
     void PushImage(const Image &img);
     
-    [[nodiscard]] Image GetCurrent() const;
-    [[nodiscard]] Image GetPrevious() const;
+    [[nodiscard]] const Image& GetCurrent() const;
 
-    Image Undo();
+    const Image& Undo();
     [[nodiscard]] bool CanUndo() const;
-    Image Redo();
+    const Image& Redo();
     [[nodiscard]] bool CanRedo() const;
 
     void Reset();

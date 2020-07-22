@@ -135,3 +135,12 @@ void Image::SampleAt(double u, double v, uint8_t &r, uint8_t &g, uint8_t &b, uin
     b = tres[2];
     a = tres[3];
 }
+
+Image &Image::operator=(const Image &img) {
+    if (this != &img){
+        this->data = img.data;
+        this->height = img.height;
+        this->width = img.width;
+    }
+    return *this;
+}

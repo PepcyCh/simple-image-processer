@@ -8,6 +8,17 @@
 
 using Kernel = Mat<double>;
 
+/*注：由于在ImageUtil库中，所有函数都采取了函数内部新建一个Image类型的变量的做法：
+ * 比如：
+ * Image func(const Image &img) {
+ *     Image res;
+ *     return res;
+ * }
+ * 在返回的时候 由于返回的是local function的变量，无法使用const Image&进行返回；
+ * 好消息是，编译器对于这种类型的返回值会强制加以右值，对于所有调用：
+ * Image x = func(x);
+ * 这类赋值语句，采取的行为等价于 x = std::move(func(x))，它会进行自发的移动构造，因此没有对图形库代码进行修改。
+*/
 class ImageUtil {
   public:
     ImageUtil() = delete;

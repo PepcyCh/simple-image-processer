@@ -7,24 +7,18 @@ void ImageModel::PushImage(const Image &img) {
     if (curr == images.size()) {
         images.push_back(img);
     } else {
-        images[curr] = img;
+        images[curr] = img; // need to copy.
         images.resize(curr + 1);
     }
     // return img;
 }
 
-Image ImageModel::GetCurrent() const {
+const Image& ImageModel::GetCurrent() const {
     assert(!images.empty() && "call GetCurrent(), but images is empty");
     return images[curr];
 }
 
-Image ImageModel::GetPrevious() const {
-    assert(!images.empty() && "call GetPrevious(), but images is empty");
-    assert(curr > 0 && "call GetPrevious(), but current image is the first one");
-    return images[curr - 1];
-}
-
-Image ImageModel::Undo() {
+const Image& ImageModel::Undo() {
     assert(CanUndo() && "call Undo(), but can't undo");
     --curr;
     return images[curr];
@@ -34,7 +28,7 @@ bool ImageModel::CanUndo() const {
     return curr > 0;
 }
 
-Image ImageModel::Redo() {
+const Image& ImageModel::Redo() {
     assert(CanRedo() && "call Redo(), but can't redo");
     ++curr;
     return images[curr];

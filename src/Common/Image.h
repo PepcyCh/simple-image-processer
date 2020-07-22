@@ -8,6 +8,7 @@ class Image {
   public:
     Image() = default;
     Image(size_t width, size_t height);
+    Image &operator =(const Image &);
     Image(size_t width, size_t height, uint8_t *data, int n_channel);
 
     [[nodiscard]] bool Empty() const;
