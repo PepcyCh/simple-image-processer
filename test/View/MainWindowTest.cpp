@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 
     MainWindow w;
     Image img;
-    w.BindLoadImage([&img](const std::string &filename, Image &_img) {
+    w.BindLoadImage([&img](const std::string &filename, Image *&_img) {
         uint8_t *data = nullptr;
         int nx, ny, nn;
         data = stbi_load(filename.c_str(), &nx, &ny, &nn, 0);
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
         } else {
             img = Image(0, 0);
         }
-        _img = img;
+        _img = &img;
     });
     w.BindSaveImage([&img](const std::string &filename) {
         stbi_write_jpg(filename.c_str(), img.GetWidth(), img.GetHeight(), img.GetChannelCnt(), img.GetData(), 0);

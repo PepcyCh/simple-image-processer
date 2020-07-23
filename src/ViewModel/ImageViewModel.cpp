@@ -26,14 +26,15 @@ void ImageViewModel::ReleaseModel() {
 }
 
 ImageViewModel::LoadImageTy ImageViewModel::LoadImageFunc() const {
-    return [this](const std::string &filename, Image &img) {
+    return [this](const std::string &filename, Image *&img) {
         auto fmt = GetImageType(filename);
-        img = ImageUtil::Load(filename, fmt);
-        if (img.Empty()) {
+        Image _img = ImageUtil::Load(filename, fmt);
+        if (_img.Empty()) {
+            img = nullptr;
             return;
         }
         image_model->Reset();
-        image_model->PushImage(img);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
@@ -45,118 +46,118 @@ ImageViewModel::SaveImageTy ImageViewModel::SaveImageFunc() const {
             fmt = ImageUtil::IMG_TY_JPG;
             filename += ".jpg";
         }
-        auto img = image_model->GetCurrent();
+        const Image &img = *image_model->GetCurrent();
         ImageUtil::Save(img, filename, fmt);
     };
 }
 
 ImageViewModel::UndoImageTy ImageViewModel::UndoImageFunc() const {
-    return [this](Image &img) {
+    return [this](Image *&img) {
         if (image_model->CanUndo()) {
-            img = image_model->Undo(); // Warning: Use Default Constructor.
+            img = image_model->Undo();
         }
     };
 }
 
 ImageViewModel::RedoImageTy ImageViewModel::RedoImageFunc() const {
-    return [this](Image &img) {
+    return [this](Image *&img) {
         if (image_model->CanRedo()) {
-            img = image_model->Redo(); // Warning: Use Default Constructor.
+            img = image_model->Redo();
         }
     };
 }
 
 ImageViewModel::GrayScaleTy ImageViewModel::GrayScaleFunc() const {
-    return [this](Image &img) {
-        img = ImageUtil::GrayScale(img);
-        image_model->PushImage(img);
+    return [this](Image *&img) {
+        Image _img = ImageUtil::GrayScale(*img);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::ThresholdTy ImageViewModel::ThresholdFunc() const {
-    return [this](Image &img) {
-        img = ImageUtil::OtsuThreshold(img);
-        image_model->PushImage(img);
+    return [this](Image *&img) {
+        Image _img = ImageUtil::OtsuThreshold(*img);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::AdapThresTy ImageViewModel::AdapThresFunc() const {
-    return [this](Image &img, int block_size, int bias) {
-        img = ImageUtil::AdaptiveThreshold(img, block_size, ImageUtil::MEAN, bias);
-        image_model->PushImage(img);
+    return [this](Image *&img, int block_size, int bias) {
+        Image _img = ImageUtil::AdaptiveThreshold(*img, block_size, ImageUtil::MEAN, bias);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::EqualizationTy ImageViewModel::EqualizationFunc() const {
-    return [this](Image &img) {
-        img = ImageUtil::HistogramEqualize(img);
-        image_model->PushImage(img);
+    return [this](Image *&img) {
+        Image _img = ImageUtil::HistogramEqualize(*img);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 
 ImageViewModel::SharpenTy ImageViewModel::SharpenFunc() const {
-    return [this](Image &img, double C) {
-        img = ImageUtil::Laplacian(img, C);
-        image_model->PushImage(img);
+    return [this](Image *&img, double C) {
+        Image _img = ImageUtil::Laplacian(*img, C);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::HistogramTy ImageViewModel::HistogramFunc() const {
     return [this](std::array<Image, 4> &imgs) {
-        imgs = ImageUtil::GetHistogramImage(image_model->GetCurrent());
+        imgs = ImageUtil::GetHistogramImage(*image_model->GetCurrent());
     };
 }
 
 ImageViewModel::MedianTy ImageViewModel::MedianFunc() const {
-    return [this](Image &img, int block_size, int iteration) {
-        img = ImageUtil::Median(img, block_size, iteration);
-        image_model->PushImage(img);
+    return [this](Image *&img, int block_size, int iteration) {
+        Image _img = ImageUtil::Median(*img, block_size, iteration);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 ImageViewModel::MeansTy ImageViewModel::MeansFunc() const {
-    return [this](Image &img, int block_size, int iteration) {
-        img = ImageUtil::Means(img, block_size, iteration);
-        image_model->PushImage(img);
+    return [this](Image *&img, int block_size, int iteration) {
+        Image _img = ImageUtil::Means(*img, block_size, iteration);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 ImageViewModel::GaussTy ImageViewModel::GaussFunc() const {
-    return [this](Image &img, int block_size, double sigma, int iteration) {
-        img = ImageUtil::Gaussian(img, block_size, sigma, iteration);
-        image_model->PushImage(img);
+    return [this](Image *&img, int block_size, double sigma, int iteration) {
+        Image _img = ImageUtil::Gaussian(*img, block_size, sigma, iteration);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 ImageViewModel::BilateralTy ImageViewModel::BilateralFunc() const {
-    return [this](Image &img, int block_size, double sigma_s, double sigma_r, int iteration) {
-        img = ImageUtil::Bilateral(img, block_size, sigma_s, sigma_r, iteration);
-        image_model->PushImage(img);
+    return [this](Image *&img, int block_size, double sigma_s, double sigma_r, int iteration) {
+        Image _img = ImageUtil::Bilateral(*img, block_size, sigma_s, sigma_r, iteration);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::ScaleTy ImageViewModel::ScaleFunc() const {
-    return [this](Image &img, double sx, double sy) {
-        img = ImageUtil::Scale(img, sx, sy);
-        image_model->PushImage(img);
+    return [this](Image *&img, double sx, double sy) {
+        Image _img = ImageUtil::Scale(*img, sx, sy);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::RotateTy ImageViewModel::RotateFunc() const {
-    return [this](Image &img, double ang) {
-        img = ImageUtil::Rotate(img, MathUtil::Radians(ang));
-        image_model->PushImage(img);
+    return [this](Image *&img, double ang) {
+        Image _img = ImageUtil::Rotate(*img, MathUtil::Radians(ang));
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::ShearXTy ImageViewModel::ShearXFunc() const {
-    return [this](Image &img, double dx) {
-        img = ImageUtil::ShearX(img, dx);
-        image_model->PushImage(img);
+    return [this](Image *&img, double dx) {
+        Image _img = ImageUtil::ShearX(*img, dx);
+        img = image_model->PushImage(std::move(_img));
     };
 }
 
 ImageViewModel::ShearYTy ImageViewModel::ShearYFunc() const {
-    return [this](Image &img, double dy) {
-        img = ImageUtil::ShearY(img, dy);
-        image_model->PushImage(img);
+    return [this](Image *&img, double dy) {
+        Image _img = ImageUtil::ShearY(*img, dy);
+        img = image_model->PushImage(std::move(_img));
     };
 }

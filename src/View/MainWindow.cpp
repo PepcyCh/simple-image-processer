@@ -82,7 +82,7 @@ void MainWindow::OnLoadBtn() {
         tr("Image File (*.bmp *.png *.jpg *.jpeg)"));
     std::string s = std::string(filename.toLocal8Bit()); // fix a bug here. (DON'T use toStdString)
     LoadImage(s, shown_image);
-    if (shown_image.Empty()) {
+    if (!shown_image) {
         return;
     }
     ShowImage();
@@ -100,7 +100,7 @@ void MainWindow::OnSaveBtn() {
 }
 
 void MainWindow::OnUndoBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     UndoImage(shown_image);
@@ -108,7 +108,7 @@ void MainWindow::OnUndoBtn() {
 }
 
 void MainWindow::OnRedoBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     RedoImage(shown_image);
@@ -116,7 +116,7 @@ void MainWindow::OnRedoBtn() {
 }
 
 void MainWindow::OnGrayScaleBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     GrayScale(shown_image);
@@ -124,7 +124,7 @@ void MainWindow::OnGrayScaleBtn() {
 }
 
 void MainWindow::OnThresholdBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     Threshold(shown_image);
@@ -132,7 +132,7 @@ void MainWindow::OnThresholdBtn() {
 }
 
 void MainWindow::OnAdapThresBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     if (adap_thres_dialog->exec() == QDialog::Accepted) {
@@ -142,7 +142,7 @@ void MainWindow::OnAdapThresBtn() {
 }
 
 void MainWindow::OnEqualizationBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     Equalization(shown_image);
@@ -150,7 +150,7 @@ void MainWindow::OnEqualizationBtn() {
 }
 
 void MainWindow::OnSharpenBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     Sharpen(shown_image, 1);
@@ -158,7 +158,7 @@ void MainWindow::OnSharpenBtn() {
 }
 
 void MainWindow::OnHistBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     std::array<Image, 4> imgs;
@@ -168,7 +168,7 @@ void MainWindow::OnHistBtn() {
 }
 
 void MainWindow::OnBlurBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     if (blur_dialog->exec() == QDialog::Accepted) {
@@ -195,28 +195,28 @@ void MainWindow::OnBlurBtn() {
 }
 
 void MainWindow::OnGeoWBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
-    double w = shown_image.GetWidth(), w_ = ui -> geo_w_input -> text().toInt();
+    double w = shown_image->GetWidth(), w_ = ui -> geo_w_input -> text().toInt();
     double ratio = w_ / w;
     if (ui->geo_check->checkState() == Qt::Checked) {
         Scale(shown_image, ratio, ratio);
-        SetGeoLabel(shown_image.GetWidth(), shown_image.GetHeight());
+        SetGeoLabel(shown_image->GetWidth(), shown_image->GetHeight());
     } else {
         Scale(shown_image, 1.0, ratio);
     }
     ShowImage() ;
 }
 void MainWindow::OnGeoHBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
-    double h = shown_image.GetHeight(), h_ = ui -> geo_h_input -> text().toInt();
+    double h = shown_image->GetHeight(), h_ = ui -> geo_h_input -> text().toInt();
     double ratio = h_ / h;
     if (ui->geo_check->checkState() == Qt::Checked) {
         Scale(shown_image, ratio, ratio);
-        SetGeoLabel(shown_image.GetWidth(), shown_image.GetHeight());
+        SetGeoLabel(shown_image->GetWidth(), shown_image->GetHeight());
     } else {
         Scale(shown_image, ratio, 1.0);
     }
@@ -224,7 +224,7 @@ void MainWindow::OnGeoHBtn() {
 }
 
 void MainWindow::OnRotBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     double ang = ui -> rot_input -> text().toInt() ;
@@ -232,7 +232,7 @@ void MainWindow::OnRotBtn() {
     ShowImage() ;
 }
 void MainWindow::OnShrXBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     double dx = ui -> shr_x_input -> text().toInt() ;
@@ -240,7 +240,7 @@ void MainWindow::OnShrXBtn() {
     ShowImage() ;
 }
 void MainWindow::OnShrYBtn() {
-    if (!has_image || shown_image.Empty()) {
+    if (!has_image || !shown_image) {
         return;
     }
     double dy = ui -> shr_y_input -> text().toInt() ;
@@ -254,10 +254,10 @@ void MainWindow::SetGeoLabel(int w, int h) {
 }
 
 void MainWindow::ShowImage() {
-    int nx = shown_image.GetWidth();
-    int ny = shown_image.GetHeight();
-    int nn = shown_image.GetChannelCnt();
-    const uint8_t *data = shown_image.GetData();
+    int nx = shown_image->GetWidth();
+    int ny = shown_image->GetHeight();
+    int nn = shown_image->GetChannelCnt();
+    const uint8_t *data = shown_image->GetData();
 
     auto fmt = QImage::Format_RGB888;
     if (nn == 1) {

@@ -23,46 +23,46 @@ class MainWindow : public QWidget {
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    using LoadImageTy = std::function<void(const std::string &, Image &)>;
+    using LoadImageTy = std::function<void(const std::string &, Image *&)>;
     void BindLoadImage(const LoadImageTy &func);
     using SaveImageTy = std::function<void(const std::string &)>;
     void BindSaveImage(const SaveImageTy &func);
-    using UndoImageTy = std::function<void(Image &)>;
+    using UndoImageTy = std::function<void(Image *&)>;
     void BindUndoImage(const UndoImageTy &func);
-    using RedoImageTy = std::function<void(Image &)>;
+    using RedoImageTy = std::function<void(Image *&)>;
     void BindRedoImage(const RedoImageTy &func);
 
-    using GrayScaleTy = std::function<void(Image &)>;
+    using GrayScaleTy = std::function<void(Image *&)>;
     void BindGrayScale(const GrayScaleTy &func);
-    using ThresholdTy = std::function<void(Image &)>;
+    using ThresholdTy = std::function<void(Image *&)>;
     void BindThreshold(const ThresholdTy &func);
-    using AdapThresTy = std::function<void(Image &, int, int)>;
+    using AdapThresTy = std::function<void(Image *&, int, int)>;
     void BindAdapThres(const AdapThresTy &func);
 
-    using EqualizationTy = std::function<void(Image &)>;
+    using EqualizationTy = std::function<void(Image *&)>;
     void BindEqualization(const EqualizationTy &func);
-    using SharpenTy = std::function<void(Image &, double C)>;
+    using SharpenTy = std::function<void(Image *&, double C)>;
     void BindSharpen(const SharpenTy &func);
     using HistogramTy = std::function<void(std::array<Image, 4> &)>;
     void BindHistogram(const HistogramTy &func);
 
-    using ScaleTy = std::function<void(Image &, double, double)>;
+    using ScaleTy = std::function<void(Image *&, double, double)>;
     void BindScale(const ScaleTy &func);
-    using RotateTy = std::function<void(Image &, double)>;
+    using RotateTy = std::function<void(Image *&, double)>;
     void BindRotate(const RotateTy &func);
 
-    using ShearXTy = std::function<void(Image &, double)>;
+    using ShearXTy = std::function<void(Image *&, double)>;
     void BindShearX(const ShearXTy &func);
-    using ShearYTy = std::function<void(Image &, double)>;
+    using ShearYTy = std::function<void(Image *&, double)>;
     void BindShearY(const ShearYTy &func);
 
-    using MedianTy = std::function<void(Image &, int, int)>;
+    using MedianTy = std::function<void(Image *&, int, int)>;
     void BindMedian(const MedianTy &func);
-    using MeansTy = std::function<void(Image &, int, int)>;
+    using MeansTy = std::function<void(Image *&, int, int)>;
     void BindMeans(const MeansTy &func);
-    using GaussTy = std::function<void(Image &, int, double, int)>;
+    using GaussTy = std::function<void(Image *&, int, double, int)>;
     void BindGauss(const GaussTy &func);
-    using BilateralTy = std::function<void(Image &, int, double, double, int)>;
+    using BilateralTy = std::function<void(Image *&, int, double, double, int)>;
     void BindBilateral(const BilateralTy &func);
 
 
@@ -70,7 +70,7 @@ class MainWindow : public QWidget {
     Ui::MainWindow *ui;
 
     bool has_image = false;
-    Image shown_image;
+    Image *shown_image = nullptr;
     QString filename;
 
     LoadImageTy LoadImage;

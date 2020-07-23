@@ -2,36 +2,37 @@
 
 #include <cassert>
 
-void ImageModel::PushImage(const Image &img) {
+Image *ImageModel::PushImage(Image &&img) {
     ++curr;
+    auto pimg = std::make_unique<Image>(std::move(img));
     if (curr == images.size()) {
-        images.push_back(img);
+        images.push_back(std::move(pimg));
     } else {
-        images[curr] = img; // need to copy.
+        images[curr] = std::move(pimg);
         images.resize(curr + 1);
     }
-    // return img;
+    return images[curr].get();
 }
 
-const Image& ImageModel::GetCurrent() const {
+Image *ImageModel::GetCurrent() const {
     assert(!images.empty() && "call GetCurrent(), but images is empty");
-    return images[curr];
+    return images[curr].get();
 }
 
-const Image& ImageModel::Undo() {
+Image *ImageModel::Undo() {
     assert(CanUndo() && "call Undo(), but can't undo");
     --curr;
-    return images[curr];
+    return images[curr].get();
 }
 
 bool ImageModel::CanUndo() const {
     return curr > 0;
 }
 
-const Image& ImageModel::Redo() {
+Image *ImageModel::Redo() {
     assert(CanRedo() && "call Redo(), but can't redo");
     ++curr;
-    return images[curr];
+    return images[curr].get();
 }
 
 bool ImageModel::CanRedo() const {

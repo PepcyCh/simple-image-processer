@@ -1,7 +1,8 @@
 .vscode
 .idea
 .DS_Store
+.clangd
 build
 cmake-build-debug
-
+compile_commands.json
 platforms/*

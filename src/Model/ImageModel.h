@@ -1,23 +1,23 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "Image.h"
 
 class ImageModel {
   public:
-    void PushImage(const Image &img);
+    Image *PushImage(Image &&img);
     
-    [[nodiscard]] const Image& GetCurrent() const;
-
-    const Image& Undo();
+    [[nodiscard]] Image *GetCurrent() const;
+    Image *Undo();
     [[nodiscard]] bool CanUndo() const;
-    const Image& Redo();
+    Image *Redo();
     [[nodiscard]] bool CanRedo() const;
 
     void Reset();
 
   private:
-    std::vector<Image> images;
+    std::vector<std::unique_ptr<Image>> images;
     int curr = 0;
 };
