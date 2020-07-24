@@ -14,8 +14,6 @@ environment:
     release_name: simple-imgae-processer-vs2019-x86
 
 before_build:
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set msvc=msvc2017
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set vs=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build
   - if "%platform%"=="x86" set QTDIR=C:/Qt/%qt%/mingw73_32
   - if "%platform%"=="x64" set QTDIR=C:/Qt/%qt%/mingw73_64
   - if "%platform%"=="x86" set QTTOOLS=C:/Qt/Tools/mingw730_32
@@ -25,7 +23,6 @@ before_build:
   - if "%platform%"=="x64" set vcvars=%vs%/vcvars64.bat
 
 build_script:
-  # - call "%vcvars%"
   - cmake -DCMAKE_C_COMPILER=gcc.exe -DCMAKE_CXX_COMPILER=g++.exe -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -B ./build .
   - cd build
   - mingw32-make
