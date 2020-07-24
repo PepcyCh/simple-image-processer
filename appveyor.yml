@@ -28,5 +28,5 @@ build_script:
   - call "%vcvars%"
   - cmake -DCMAKE_C_COMPILER=gcc.exe -DCMAKE_CXX_COMPILER=g++.exe -G "MinGW Makefiles" -B ./build .
   - cd build
-  - make
+  - mingw32-make
   - cd ..
