@@ -15,18 +15,36 @@ environment:
 
 before_build:
   - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set msvc=msvc2017
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set vs=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build
-  - if "%platform%"=="x86" set QTDIR=C:\Qt\%qt%\mingw73_32
-  - if "%platform%"=="x64" set QTDIR=C:\Qt\%qt%\mingw73_64
-  - if "%platform%"=="x86" set QTTOOLS=C:\Qt\Tools\mingw730_32
-  - if "%platform%"=="x64" set QTTOOLS=C:\Qt\Tools\mingw730_64
-  - set PATH=%PATH%;%QTDIR%\bin;%QTTOOLS%\bin;
-  - if "%platform%"=="x86" set vcvars=%vs%\vcvars32.bat
-  - if "%platform%"=="x64" set vcvars=%vs%\vcvars64.bat
+  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set vs=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build
+  - if "%platform%"=="x86" set QTDIR=C:/Qt/%qt%/mingw73_32
+  - if "%platform%"=="x64" set QTDIR=C:/Qt/%qt%/mingw73_64
+  - if "%platform%"=="x86" set QTTOOLS=C:/Qt/Tools/mingw730_32
+  - if "%platform%"=="x64" set QTTOOLS=C:/Qt/Tools/mingw730_64
+  - set PATH=%PATH%;%QTDIR%/bin;%QTTOOLS%/bin;
+  - if "%platform%"=="x86" set vcvars=%vs%/vcvars32.bat
+  - if "%platform%"=="x64" set vcvars=%vs%/vcvars64.bat
 
 build_script:
-  - call "%vcvars%"
-  - cmake -DCMAKE_C_COMPILER=gcc.exe -DCMAKE_CXX_COMPILER=g++.exe -G "MinGW Makefiles" -B ./build .
+  # - call "%vcvars%"
+  - cmake -DCMAKE_C_COMPILER=gcc.exe -DCMAKE_CXX_COMPILER=g++.exe -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -B ./build .
   - cd build
   - mingw32-make
+  - mkdir release
+  - cp ./src/image-processer.exe ./release
+  - windeployqt --qmldir %QTDIR%/qml ./release/image-processer.exe
   - cd ..
+
+artifacts:
+  - path: ./build/release
+    name: $(release_name)
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: BpBlm35pE+T35mcffyNCOZH8fRik/UIBHy/FgB+mR1xSldsB/mc89NNj8vt83kMD
+  description: "simple-image-processer"
+  draft: true
+  prerelease: false
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
